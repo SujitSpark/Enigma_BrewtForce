@@ -51,6 +51,11 @@ def init() -> None:
                 payload TEXT NOT NULL
             );
         """)
+        cols = {r["name"] for r in c.execute("PRAGMA table_info(outreach)")}
+        if "sent_at" not in cols:
+            c.execute("ALTER TABLE outreach ADD COLUMN sent_at TEXT")
+        if "demo" not in cols:
+            c.execute("ALTER TABLE outreach ADD COLUMN demo INTEGER NOT NULL DEFAULT 0")
 
 
 # ---------- analyses ----------
@@ -126,8 +131,14 @@ def list_outreach() -> list[dict]:
 
 def update_outreach(outreach_id: int, **fields) -> dict | None:
     fields["updated_at"] = _now()
+    current = get_outreach(outreach_id) or {}
     if fields.get("status") in RESPONSES:
         fields["responded_at"] = fields["updated_at"]
+    if fields.get("status") in ("sent",) + RESPONSES and not current.get("sent_at"):
+        fields["sent_at"] = fields["updated_at"]
+    if fields.get("status") == "draft":
+        fields["sent_at"] = None
+        fields["responded_at"] = None
     cols = ", ".join(f"{k} = ?" for k in fields)
     with _conn() as c:
         c.execute(f"UPDATE outreach SET {cols} WHERE id = ?", (*fields.values(), outreach_id))
@@ -146,6 +157,29 @@ def feedback() -> dict:
     for r in rows:
         out.setdefault((r["consumer_id"], r["material_id"]), {})[r["status"]] = r["n"]
     return out
+
+
+def insert_demo_outreach(rows: list[dict]) -> int:
+    """Rows carry explicit timestamps; every row is flagged demo=1 so it can be cleared."""
+    with _conn() as c:
+        for r in rows:
+            c.execute(
+                """INSERT INTO outreach (token, created_at, updated_at, analysis_id, opportunity_id, supplier_name,
+                       supplier_location, material_id, material_name, consumer_id, consumer_name, pathway_type, score,
+                       net_tco2e_per_year, net_inr_per_year, recipient_email, subject, body, status, response_note,
+                       responded_at, sent_at, demo)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)""",
+                (secrets.token_urlsafe(12), r["created_at"], r["updated_at"], None, r["opportunity_id"], r["supplier_name"],
+                 r["supplier_location"], r["material_id"], r["material_name"], r["consumer_id"], r["consumer_name"],
+                 r["pathway_type"], r["score"], r["net_tco2e_per_year"], r["net_inr_per_year"], r["recipient_email"],
+                 r["subject"], r["body"], r["status"], r.get("response_note"), r.get("responded_at"), r.get("sent_at")),
+            )
+    return len(rows)
+
+
+def clear_demo_outreach() -> int:
+    with _conn() as c:
+        return c.execute("DELETE FROM outreach WHERE demo = 1").rowcount
 
 
 # ---------- what-if: user-added industries ----------

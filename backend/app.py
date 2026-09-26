@@ -344,6 +344,67 @@ def respond(token: str, status: str):
 as <b>{label}</b>. The supplier will see this in their dashboard.</p></body>""")
 
 
+# ---------------------------------------------------------------- demo outreach activity
+
+DEMO_PLAN = (["interested"] * 8 + ["more_info"] * 4 + ["not_feasible"] * 2 + ["sent"] * 7 + ["draft"] * 3)
+DEMO_NOTES = {
+    "interested": ["Wants a 5 t trial lot next month", "Asked for a supply contract draft", "Plant QA approved the sample",
+                   "Interested if delivered weekly", "Keen, needs BIS test certificate", "Will visit the site next week",
+                   "Ready for a 3-month pilot", "Wants pricing for 12 months"],
+    "more_info": ["Send XRF / chemical analysis first", "Needs moisture content data", "Asked about monsoon storage",
+                  "Wants leachate test results"],
+    "not_feasible": ["Already contracted with another supplier", "Distance too high for our freight budget"],
+}
+
+
+@app.post("/api/demo/outreach")
+def seed_demo_outreach():
+    import random
+    from datetime import datetime, timedelta, timezone
+
+    store.clear_demo_outreach()
+    net = _network(Scenario())
+    seen, picks = set(), []
+    for o in net["opportunities"]:
+        if o["pathway_type"] == "missing_hub" or o["consumer"]["id"] in seen:
+            continue
+        seen.add(o["consumer"]["id"])
+        picks.append(o)
+        if len(picks) == len(DEMO_PLAN):
+            break
+
+    rng = random.Random(42)
+    now = datetime.now(timezone.utc)
+    iso = lambda d: d.isoformat(timespec="seconds")  # noqa: E731
+    notes = {k: list(v) for k, v in DEMO_NOTES.items()}
+    rows = []
+    for o, status in zip(picks, DEMO_PLAN):
+        created = now - timedelta(days=rng.uniform(1, 14), hours=rng.uniform(0, 8))
+        sent = created + timedelta(hours=rng.uniform(0.5, 6)) if status != "draft" else None
+        replied = None
+        if status in store.RESPONSES:
+            replied = min(now - timedelta(minutes=5), sent + timedelta(days=rng.uniform(0.3, 5)))
+        supplier = {"company": o["producer"]["name"], "location_label": o["producer"]["city"]}
+        email = outreach.draft(o, supplier, o["material_name"])
+        slug = re.sub(r"[^a-z0-9]+", "", o["consumer"]["name"].lower())[:18]
+        rows.append({
+            "created_at": iso(created), "updated_at": iso(replied or sent or created),
+            "opportunity_id": o["id"], "supplier_name": o["producer"]["name"], "supplier_location": o["producer"]["city"],
+            "material_id": o["material_id"], "material_name": o["material_name"], "consumer_id": o["consumer"]["id"],
+            "consumer_name": o["consumer"]["name"], "pathway_type": o["pathway_type"], "score": o["score"],
+            "net_tco2e_per_year": o["impact"]["net_tco2e_per_year"], "net_inr_per_year": o["economics"]["net_inr_per_year"],
+            "recipient_email": f"procurement@{slug}.example", "subject": email["subject"], "body": email["body"],
+            "status": status, "sent_at": iso(sent) if sent else None, "responded_at": iso(replied) if replied else None,
+            "response_note": notes[status].pop(0) if status in notes and notes[status] else None,
+        })
+    return {"created": store.insert_demo_outreach(rows)}
+
+
+@app.delete("/api/demo/outreach")
+def clear_demo_outreach():
+    return {"deleted": store.clear_demo_outreach()}
+
+
 # ---------------------------------------------------------------- what-if: add industries
 
 @app.get("/api/custom-industries")

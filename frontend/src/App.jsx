@@ -143,7 +143,7 @@ export default function App() {
             {route.page === 'schemes' && <Schemes refreshKey={refreshKey} />}
             {route.page === 'outreach' && (
               <Outreach records={records} selectedId={route.arg ? Number(route.arg) : null} smtp={smtp}
-                onSelect={(id) => { window.location.hash = `#/outreach/${id}`; }} onSaved={onOutreachSaved} />
+                onSelect={(id) => { window.location.hash = `#/outreach/${id}`; }} onSaved={onOutreachSaved} onReload={loadOutreach} />
             )}
           </div>
         )}

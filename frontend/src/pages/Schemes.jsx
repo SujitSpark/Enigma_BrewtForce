@@ -29,10 +29,6 @@ export default function Schemes({ refreshKey }) {
 
   return (
     <div className="page">
-      <p className="notice info">
-        These are <b>potential policy pathways</b>, not guaranteed subsidies. Every match needs an eligibility check, and carbon-credit
-        pathways need an approved methodology, monitoring and verification before any reduction is credited.
-      </p>
       <div className="grid-cc" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
         {schemes.map((s) => {
           const u = usage[s.id];
