@@ -18,3 +18,6 @@ frontend/build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Demo recordings (large binaries)
+demo/*.mp4

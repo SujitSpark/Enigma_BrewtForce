@@ -1,71 +1,132 @@
-# Symbiosis — Industrial Resource Intelligence
+# Byloop: Industrial Resource Intelligence
 
-Sustainability track, PS 5: *Discovering Hidden Industrial Symbiosis*.
+An AI-driven platform that discovers hidden opportunities for industries to exchange by-products as resources. It evaluates whether each exchange is actually feasible, links it to relevant Indian policy pathways, and connects the plants through automated outreach.
 
-An AI-driven platform that discovers opportunities for industries to exchange by-products as resources. It weighs material compatibility, quantity, location, timing, processing, economics and environmental impact. It then connects the matched industries through outreach and learns from their responses.
+---
 
-## Run
+## Team Name & Members
 
+**Team BrewtForce**
+
+- Shruti Subramanian
+- Shubhashri Sriram
+- Sakshi Podhade
+- Sujit Shiravle
+
+---
+
+## Problem Statement
+
+**Sustainability Track: Discovering Hidden Industrial Symbiosis**
+
+Industries generate large quantities of by-products and residual materials that are often treated as waste. At the same time, other industries buy virgin raw materials that suitable industrial by-products could replace. These opportunities are hard to identify, because they depend on material properties, quantity, location, timing, transportation, processing requirements and environmental impact.
+
+**Objective:** develop a practical, data-driven solution that helps uncover and assess opportunities for industrial resource exchange:
+- improve the identification of opportunities for better use of industrial resources;
+- consider the relevant practical, operational and environmental factors when assessing opportunities;
+- show how the approach can be useful across different industrial contexts.
+
+### Our solution
+
+Byloop turns an industrial email into ranked, explainable resource-exchange opportunities:
+
+1. **Understands** free text: material, quantity, location and availability.
+2. **Discovers three pathway types:**
+   - **direct** (source → consumer);
+   - **multi-step** (source → processing hub → consumer);
+   - **hidden** (non-obvious uses, or a *missing processing hub* that would unlock existing demand).
+3. **Scores every opportunity on 7 dimensions** (material, quantity, geography, processing, timing, environment, economics), with a reason for each.
+4. **Quantifies impact honestly**: net CO₂e *after* processing and transport, plus a ₹ business case.
+5. **Maps policy pathways**: Fly Ash Utilisation Notification, Carbon Credit Trading Scheme, Green Steel Taxonomy, Steel Scrap Recycling Policy, Hazardous Waste Rules and C&D Waste Rules, each marked *verify eligibility*.
+6. **Closes the loop**: generates outreach emails with one-click replies (Interested / Need info / Not feasible), and responses re-rank future recommendations.
+7. **What-if simulator**: change the radius, freight cost, carbon price, hubs or priorities, or add a new industry, and watch opportunities appear or disappear.
+
+---
+
+## Tech Stack Used
+
+| Layer | Technology |
+|---|---|
+| **Backend** | Python 3.10+ · FastAPI · Uvicorn · Pydantic v2 |
+| **Database** | SQLite (Python `sqlite3`) for analyses, outreach, responses and user-added industries |
+| **Engine** | Custom Python modules: NLP extraction (`core/nlp.py`), 7-dimension feasibility and pathway discovery (`core/engine.py`), impact, economics and policy mapping (`core/impact.py`) |
+| **Geospatial** | GeoJSON industrial layer · Haversine distances · **OSRM** live road routing · **OpenStreetMap Nominatim** geocoding (with offline fallback) |
+| **Frontend** | React 18 (Create React App) · Leaflet + React-Leaflet · OpenStreetMap tiles · custom SVG network graph and charts |
+| **Design** | Vanilla × Moonstone palette (contrast-checked) · Instrument Serif + IBM Plex Sans/Mono · CSS animations that respect *reduce motion* |
+| **Outreach** | Auto-generated emails, tokenised response links, optional SMTP sending |
+
+### AI Tools Used
+
+| Tool | Used for |
+|---|---|
+| **ChatGPT** (OpenAI) | Ideation, problem framing, research on materials and policies, content drafting |
+| **Antigravity** (Google) | AI-assisted coding and development |
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+- **Python 3.10+**
+- **Node.js 18+** and npm
+- Internet connection (for map tiles, live routing and geocoding; the app falls back to estimates if offline)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/SujitSpark/Enigma_BrewtForce.git
+cd Enigma_BrewtForce
+```
+
+### 2. Start the backend (terminal 1)
 ```bash
 cd backend
 pip install -r requirements.txt
-python app.py            # API on http://127.0.0.1:8000  (docs: /docs)
+python app.py
 ```
+The API runs on **http://127.0.0.1:8000**, with interactive docs at http://127.0.0.1:8000/docs.
+The SQLite database (`backend/symbiosis.db`) is created automatically on first run.
 
+### 3. Start the frontend (terminal 2)
 ```bash
 cd frontend
 npm install
-npm start                # UI on http://localhost:3000  (npm run dev also works)
+npm start
+```
+The app opens on **http://localhost:3000**. `npm run dev` also works. The dev server proxies `/api` to the backend.
+
+### 4. Try it
+1. The **landing page** loads first. Click **Launch platform**.
+2. **Analyse & What-if**: click the *"Fly ash · Chandrapur"* sample, then **Discover opportunities**.
+3. Open any opportunity to see its 7-dimension score, carbon and ₹ breakdown, and **policy pathways**.
+4. **Outreach**: click **Load demo activity** to see the full outreach funnel. Demo records are labelled and can be cleared.
+
+### Optional: real email sending
+Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` and `SMTP_FROM` before starting the backend. Set `PUBLIC_BASE_URL` to a public API URL so response links work outside your machine. Without SMTP, use **Open in mail app**, then **Mark as sent**.
+
+### Troubleshooting
+| Symptom | Fix |
+|---|---|
+| App stuck loading, or "API returned a web page" | Make sure the backend is running, then restart `npm start` so the `/api` proxy is picked up |
+| Port 8000 or 3000 already in use | Stop the other process, or set `PORT=3001` before `npm start` |
+| Map tiles or road distances missing | Check the internet connection; distances fall back to straight-line × 1.3 |
+
+---
+
+## Project Structure
+
+```
+backend/
+  app.py              FastAPI routes
+  core/               nlp · engine · impact · geo · outreach · store
+  data/               industries.geojson · profiles.json · materials.json · schemes.json
+frontend/
+  src/pages/          Landing · CommandCenter · Analyse · Opportunities · Materials · Network · Impact · Schemes · Outreach
+  src/components/     NetworkMap · OpportunityDetail · WhatIfPanel · IntakePanel · Motion …
+demo/                 Demo video timeline & voice-over script
+PRESENTATION.md       Presentation guide
+SCRIPT.md             3:30 pitch script
 ```
 
-## Sections
+## Data Note
 
-| Section | What it does |
-|---|---|
-| **Command Center** | Live resource-network map (sources → hubs → consumers), KPIs (waste available, potentially diverted, net CO₂e, ₹ opportunity, active exchanges), top opportunities, industry-response feed |
-| **Analyse & What-if** | Email → structured supply profile (material, t/month, location, company, availability months) → ranked opportunities. The simulator changes radius, freight ₹/t·km, carbon price, hub availability and the 7 weights, or adds a new industry; results recalculate and show the delta (e.g. *Opportunities 1 → 3*) |
-| **Opportunities** | Every exchange across known plants, filterable by pathway, material and outreach status |
-| **Materials** | Search a by-product: properties, possible uses, suppliers, consumers, processing hubs, supply vs demand |
-| **Network** | Ecosystem graph (sources → processing hubs → consumers), with link width = tonnes/yr |
-| **Impact** | Waste diverted, net CO₂e and ₹ value by material and pathway, allocated without double counting |
-| **Schemes** | Indian policy pathways linked to opportunities, with verification requirements |
-| **Outreach** | Email drafts with one-click response links (Interested / Need info / Not feasible), a status tracker, and optional SMTP sending |
-
-## How the engine works
-
-1. **Structure**: `core/nlp.py` extracts material, quantity (t/month, TPD, lakh t/yr, MT/yr), location, company and availability months.
-2. **Discover pathways**: `core/engine.py`
-   - **Direct**: the consumer uses the material as-is, or processes it in-house.
-   - **Multi-step**: source → an existing processing hub with the required capability and capacity → consumer.
-   - **Hidden**: a non-obvious cross-sector use, or a **missing processing hub**. Demand exists within range but nothing can process the material, so the engine proposes where a hub should go and what it would unlock.
-3. **Feasibility**: every pathway is scored on 7 dimensions. The weights are a configurable prototype choice, not an official formula.
-   `S = 25%·Material + 15%·Quantity + 15%·Geography + 10%·Processing + 10%·Timing + 15%·Environment + 10%·Economics`
-   Each score comes with its reasons (✓ / ! / ×).
-4. **Impact** (`core/impact.py`), on the quantity *actually reused* after quantity and month-by-month timing limits:
-   - `Net CO₂e = Q·EF_virgin − Q·EF_processing − Q·D·EF_transport`
-   - `Economic benefit = virgin savings + disposal savings + carbon value − transport − processing`. By-product revenue is shown separately, because it's a transfer between the two parties.
-5. **Policy pathways**: real instruments (Fly Ash Notification, HWM Rules, C&D Rules, Steel Scrap Recycling Policy, Green Steel Taxonomy, CCTS 2023), always marked *eligibility verification required*.
-6. **Geography**: live road distance (OSRM) and geocoding (OpenStreetMap Nominatim), with an offline fallback.
-7. **Feedback loop**: responses to outreach re-weight future scores for that buyer and material (*not feasible* → ×0.8, *interested* → ×1.05).
-
-## Data (`backend/data/`)
-
-The location layer is kept separate from resource profiles, as the architecture requires.
-
-- `industries.geojson`: **where** things are. 36 plants and demand hubs plus 12 processing hubs, with state and district. Named facilities are real plants at approximate, town-level coordinates. `cluster` and `processor` entries are illustrative.
-- `profiles.json`: **what** each site supplies or needs, how much, and when. Volumes are illustrative order-of-magnitude estimates, not company disclosures.
-- `materials.json`: 9 by-products, their uses, processing steps, emission factors, prices and seasonality. All are indicative screening values.
-- `schemes.json`: policy instruments. No subsidy amounts are asserted.
-
-## Team modules
-
-| Person | Owns | Code |
-|---|---|---|
-| 1 · AI/NLP & matching | extraction, pathway discovery, 7-dimension ranking, hidden hubs | `core/nlp.py`, `core/engine.py` |
-| 2 · Data, impact & schemes | datasets, CO₂ + ₹ models, environment score, policy mapping | `data/`, `core/impact.py` |
-| 3 · GIS | GeoJSON layer, geocoding, live routing, maps | `core/geo.py`, `frontend/src/components/NetworkMap.jsx` |
-| 4 · Application & engagement | all UI sections, what-if, outreach, response loop, integration | `frontend/src/`, `core/outreach.py`, `core/store.py`, `app.py` |
-
-## Optional: real email sending
-
-Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` and `SMTP_FROM` before starting the backend. To make the response links in emails work outside your machine, set `PUBLIC_BASE_URL` to a public URL for the API. Without SMTP, use *Open in mail app*, then *Mark as sent*.
+Plant names and town-level locations, the policy instruments and the BIS/IRC standards are real. Supply and demand volumes, prices and emission factors are **illustrative screening values**, clearly labelled in the app. Policy matches are **potential pathways subject to eligibility verification**, not guaranteed subsidies or certified carbon credits.
