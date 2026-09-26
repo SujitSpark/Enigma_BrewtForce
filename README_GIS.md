@@ -86,6 +86,7 @@ uvicorn backend.main:app --reload
 | GET | `/gis/nearby?industry_id=IND001&radius_km=50` | Nearby industries (query form) |
 | POST | `/gis/distance` | Distance between two coordinate pairs |
 | POST | `/gis/evaluate` | Full feasibility for a source/consumer pair |
+| POST | `/gis/evaluate-matches` | Batch evaluation of candidate matches (flexible schema) |
 | POST | `/gis/opportunities` | **Integration contract**: batch of candidates |
 | GET | `/gis/map/{source_id}/{consumer_id}` | Map-ready JSON |
 | GET | `/gis/route/{source_id}/{consumer_id}?provider=straight_line` | Route info |
@@ -165,6 +166,95 @@ uvicorn backend.main:app --reload
   "map_data": { "source": { "...": "..." }, "consumer": { "...": "..." }, "distance_km": 13.32 }
 }
 ```
+
+---
+
+### POST `/gis/evaluate-matches` (batch evaluation)
+
+Accepts **two payload shapes** and evaluates every match geographically. All
+distance/score values are **recomputed server-side from real coordinates** —
+any `distance_km` / `geographic_score` / `feasibility` supplied in the request
+is ignored, never echoed back as a result.
+
+**Coordinate resolution precedence:** explicit lat/lon in the payload →
+dataset record by id → dataset city match. The chosen origin is reported per
+match as `coordinate_source` (`payload` / `dataset` / `city:<Name>`), and
+metadata (industry_type, city) is still enriched from the dataset when the id
+is known.
+
+**Shape B — rich (source context + explicit match coordinates):**
+
+```json
+{
+  "source": {
+    "id": "IND001", "name": "ABC Steel", "industry_type": "Steel",
+    "location": "Pune", "latitude": 18.5204, "longitude": 73.8567,
+    "material": "Steel Slag", "quantity": 500, "unit": "tonnes/month"
+  },
+  "potential_uses": ["Cement production", "Road construction"],
+  "matches": [
+    {"id": "IND005", "name": "XYZ Cement", "industry_type": "Cement",
+     "location": "Pune", "latitude": 18.6, "longitude": 73.8},
+    {"id": "IND008", "name": "Road Materials Ltd", "industry_type": "Road Construction",
+     "location": "Pune", "latitude": 18.75, "longitude": 73.95}
+  ],
+  "max_radius_km": 50
+}
+```
+
+**Shape A — compact (Person 1's `opportunities` output, numbers recomputed):**
+
+```json
+{
+  "source": {"id": "IND001", "name": "ABC Steel"},
+  "opportunities": [
+    {"consumer_id": "IND005", "consumer_name": "XYZ Cement",
+     "distance_km": 13.32, "within_radius": true,
+     "geographic_score": 95, "feasibility": "VERY_HIGH"}
+  ]
+}
+```
+
+**Response (identical structure for both shapes):**
+
+```json
+{
+  "source": {
+    "id": "IND001", "name": "ABC Steel", "industry_type": "Steel",
+    "location": "Pune", "material": "Steel Slag",
+    "quantity": 500.0, "unit": "tonnes/month",
+    "latitude": 18.5204, "longitude": 73.8567,
+    "coordinate_source": "payload"
+  },
+  "max_radius_km": 50.0,
+  "potential_uses": ["Cement production", "Road construction"],
+  "count": 2,
+  "evaluated": 2,
+  "matches": [
+    {
+      "consumer_id": "IND005",
+      "consumer_name": "XYZ Cement",
+      "industry_type": "Cement",
+      "location": "Pune",
+      "latitude": 18.6, "longitude": 73.8,
+      "coordinate_source": "payload",
+      "distance_km": 10.68,
+      "within_radius": true,
+      "geographic_score": 96,
+      "feasibility": "VERY_HIGH",
+      "map_data": { "...": "Leaflet-ready source/consumer/distance JSON" },
+      "status": "ok",
+      "detail": null
+    }
+  ]
+}
+```
+
+Matches are sorted nearest-first. A match that cannot be resolved (no id in
+dataset, no coordinates, unknown city) gets `"status": "unresolved"` with a
+`detail` reason and null GIS fields — the request never fails wholesale.
+`potential_uses` is echoed untouched; use/material compatibility stays with
+Person 1.
 
 ---
 

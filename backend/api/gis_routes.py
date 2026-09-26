@@ -15,6 +15,8 @@ from backend.gis.schemas import (
     DistanceRequest,
     DistanceResponse,
     ErrorResponse,
+    EvaluateMatchesRequest,
+    EvaluateMatchesResponse,
     EvaluateRequest,
     EvaluateResponse,
     Industry,
@@ -161,6 +163,33 @@ def post_evaluate(payload: EvaluateRequest) -> EvaluateResponse:
     except IndustryNotFoundError as exc:
         raise _not_found(exc)
     return EvaluateResponse(**result)
+
+
+# --------------------------------------------------------------------------- #
+# evaluate-matches - flexible batch evaluation for the matching module
+# --------------------------------------------------------------------------- #
+@router.post(
+    "/evaluate-matches",
+    response_model=EvaluateMatchesResponse,
+    responses={404: {"model": ErrorResponse}},
+    summary=(
+        "Evaluate a batch of candidate matches (accepts both the compact "
+        "'opportunities' shape and the rich 'matches' shape); all GIS values "
+        "are recomputed from real coordinates"
+    ),
+)
+def post_evaluate_matches(payload: EvaluateMatchesRequest) -> EvaluateMatchesResponse:
+    svc = get_service()
+    if payload.source is None or not (payload.source.id or payload.source.latitude is not None or payload.source.location):
+        raise HTTPException(status_code=422, detail="source must include an id, coordinates or a location")
+    result = svc.evaluate_matches(
+        source=payload.source,
+        matches=payload.matches,
+        opportunities=payload.opportunities,
+        max_radius_km=payload.max_radius_km,
+        potential_uses=payload.potential_uses,
+    )
+    return EvaluateMatchesResponse(**result)
 
 
 # --------------------------------------------------------------------------- #

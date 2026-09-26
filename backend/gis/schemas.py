@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from backend.gis.config import DEFAULT_MAX_RADIUS_KM
 
@@ -143,6 +143,109 @@ class OpportunitiesResponse(BaseModel):
     source_name: str
     max_radius_km: float
     opportunities: List[Opportunity]
+
+
+# --------------------------------------------------------------------------- #
+# evaluate-matches - flexible batch evaluation
+#
+# Accepts BOTH payload shapes used by the team:
+#   A) compact:  source {id, name} + opportunities [{consumer_id, ...}]
+#   B) rich:     source {id, name, ..., latitude, longitude, material, ...}
+#                + matches [{id, name, ..., latitude, longitude}]
+#
+# Fields that look computed (distance_km, geographic_score, ...) are accepted
+# for convenience but are ALWAYS recomputed server-side from real coordinates.
+# --------------------------------------------------------------------------- #
+class SourceRef(BaseModel):
+    """Source industry reference; only some fields may be present."""
+
+    model_config = ConfigDict(extra="ignore")
+
+    id: Optional[str] = None
+    name: Optional[str] = None
+    industry_type: Optional[str] = None
+    location: Optional[str] = None
+    city: Optional[str] = None
+    material: Optional[str] = None
+    quantity: Optional[float] = None
+    unit: Optional[str] = None
+    latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+
+
+class OpportunityRef(BaseModel):
+    """Compact candidate (Person 1's output shape).
+
+    ``distance_km`` / ``geographic_score`` / ``feasibility`` / ``within_radius``
+    are accepted but ignored - they are recomputed from coordinates.
+    """
+
+    model_config = ConfigDict(extra="ignore")
+
+    consumer_id: Optional[str] = None
+    consumer_name: Optional[str] = None
+    location: Optional[str] = None
+    latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+    # Accepted but recomputed server-side:
+    distance_km: Optional[float] = None
+    within_radius: Optional[bool] = None
+    geographic_score: Optional[int] = None
+    feasibility: Optional[str] = None
+
+
+class MatchRef(BaseModel):
+    """Rich candidate (matching-module shape with explicit coordinates)."""
+
+    model_config = ConfigDict(extra="ignore")
+
+    id: Optional[str] = None
+    name: Optional[str] = None
+    industry_type: Optional[str] = None
+    location: Optional[str] = None
+    city: Optional[str] = None
+    latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+
+
+class EvaluateMatchesRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    source: SourceRef
+    matches: Optional[List[MatchRef]] = None
+    opportunities: Optional[List[OpportunityRef]] = None
+    # Echoed back untouched. Material/use compatibility is Person 1's scope.
+    potential_uses: Optional[List[str]] = None
+    max_radius_km: Optional[float] = Field(default=None, gt=0)
+
+
+class MatchEvaluation(BaseModel):
+    """Geographic verdict for ONE candidate match."""
+
+    consumer_id: Optional[str] = None
+    consumer_name: str
+    industry_type: Optional[str] = None
+    location: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    # "payload" | "dataset" | "city:<Name>" | None (unresolved)
+    coordinate_source: Optional[str] = None
+    distance_km: Optional[float] = None
+    within_radius: Optional[bool] = None
+    geographic_score: Optional[int] = None
+    feasibility: Optional[str] = None
+    map_data: Optional[dict] = None
+    status: str  # "ok" | "unresolved"
+    detail: Optional[str] = None  # reason when unresolved
+
+
+class EvaluateMatchesResponse(BaseModel):
+    source: dict
+    max_radius_km: float
+    potential_uses: List[str] = Field(default_factory=list)
+    count: int
+    evaluated: int
+    matches: List[MatchEvaluation]
 
 
 class ErrorResponse(BaseModel):

@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence
 
 from backend.gis.config import DEFAULT_SCORING_CONFIG, ScoringConfig
-from backend.gis.coordinates import resolve_coordinate
+from backend.gis.coordinates import resolve_coordinate, validate_coordinates
 from backend.gis.distance import distance_between
 from backend.gis.feasibility import evaluate_distance
 from backend.gis.nearby import find_nearby, to_nearby_item
@@ -209,6 +209,223 @@ class GISService:
             )
         opportunities.sort(key=lambda o: o.distance_km)
         return opportunities
+
+    # ------------------------------------------------------------------ #
+    # evaluate-matches - flexible batch evaluation (recomputes everything)
+    # ------------------------------------------------------------------ #
+    def _resolve_ref(
+        self, *, ref_id, latitude, longitude, location
+    ) -> tuple[Optional[Industry], Optional[Coordinate], str, Optional[str]]:
+        """Resolution precedence: explicit coordinates -> dataset id -> city.
+
+        When the caller supplies coordinates they are authoritative for this
+        request; the dataset is the fallback when only an id is given. The
+        origin is always reported via ``coordinate_source`` so nothing is
+        silently substituted.
+        """
+        if latitude is not None and longitude is not None:
+            try:
+                return None, validate_coordinates(latitude, longitude), "payload", None
+            except ValueError as exc:
+                return None, None, "invalid", str(exc)
+        if ref_id:
+            try:
+                industry = self.get_industry(ref_id)
+                return industry, industry.coordinate, "dataset", None
+            except IndustryNotFoundError:
+                pass  # fall through to location matching
+        if location:
+            # Fallback: match a dataset record by city name (no network).
+            for industry in self._industries.values():
+                if industry.city.lower() == location.strip().lower():
+                    return None, industry.coordinate, f"city:{industry.city}", None
+            return None, None, "unresolved", f"No coordinates or dataset record for '{location}'"
+        return None, None, "unresolved", "No id, coordinates or location supplied"
+
+    def evaluate_matches(
+        self,
+        source,
+        matches: Optional[Sequence] = None,
+        opportunities: Optional[Sequence] = None,
+        max_radius_km: Optional[float] = None,
+        potential_uses: Optional[Sequence[str]] = None,
+    ) -> dict:
+        """Evaluate every candidate match against the source, geographically.
+
+        Accepts the compact shape (``opportunities`` with pre-computed numbers)
+        and the rich shape (``matches`` with explicit coordinates). All GIS
+        values are recomputed here from real coordinates - supplied numbers in
+        the payload are ignored, never echoed as results.
+        """
+        from backend.gis.schemas import MatchRef, OpportunityRef, SourceRef
+
+        src = SourceRef(**source) if isinstance(source, dict) else source
+
+        candidates: List[dict] = []
+        for m in matches or []:
+            m = MatchRef(**m) if isinstance(m, dict) else m
+            candidates.append(
+                {
+                    "id": m.id,
+                    "name": m.name,
+                    "industry_type": m.industry_type,
+                    "location": m.location or m.city,
+                    "latitude": m.latitude,
+                    "longitude": m.longitude,
+                }
+            )
+        for o in opportunities or []:
+            o = OpportunityRef(**o) if isinstance(o, dict) else o
+            candidates.append(
+                {
+                    "id": o.consumer_id,
+                    "name": o.consumer_name,
+                    "industry_type": None,
+                    "location": o.location,
+                    "latitude": o.latitude,
+                    "longitude": o.longitude,
+                }
+            )
+
+        # --- resolve source ------------------------------------------------ #
+        src_industry, src_coord, src_origin, src_error = self._resolve_ref(
+            ref_id=src.id,
+            latitude=src.latitude,
+            longitude=src.longitude,
+            location=src.location or src.city,
+        )
+        effective = self.config.with_radius(max_radius_km)
+
+        source_out = {
+            k: v for k, v in {
+                "id": src.id,
+                "name": src.name or (src_industry.name if src_industry else None),
+                "industry_type": src.industry_type
+                or (src_industry.industry_type if src_industry else None),
+                "location": src.location or src.city
+                or (src_industry.city if src_industry else None),
+                "material": src.material,
+                "quantity": src.quantity,
+                "unit": src.unit,
+            }.items() if v is not None
+        }
+        if src_coord is not None:
+            source_out["latitude"] = src_coord.latitude
+            source_out["longitude"] = src_coord.longitude
+            source_out["coordinate_source"] = src_origin
+        elif src_error:
+            source_out["coordinate_source"] = "unresolved"
+            source_out["warning"] = src_error
+
+        # --- evaluate every candidate ------------------------------------- #
+        evaluations: List[dict] = []
+        for cand in candidates:
+            # Metadata enrichment is independent of coordinate resolution.
+            meta: Optional[Industry] = None
+            if cand["id"]:
+                try:
+                    meta = self.get_industry(cand["id"])
+                except IndustryNotFoundError:
+                    meta = None
+            ind, coord, origin, error = self._resolve_ref(
+                ref_id=cand["id"],
+                latitude=cand["latitude"],
+                longitude=cand["longitude"],
+                location=cand["location"],
+            )
+            entry: dict = {
+                "consumer_id": cand["id"] or (meta.id if meta else None),
+                "consumer_name": cand["name"]
+                or (meta.name if meta else None)
+                or "Unknown",
+                "industry_type": cand["industry_type"]
+                or (meta.industry_type if meta else None),
+                "location": cand["location"] or (meta.city if meta else None),
+            }
+            if coord is None:
+                entry.update(
+                    {
+                        "coordinate_source": origin,
+                        "status": "unresolved",
+                        "detail": error or "Could not resolve coordinates",
+                        "distance_km": None,
+                        "within_radius": None,
+                        "geographic_score": None,
+                        "feasibility": None,
+                        "map_data": None,
+                    }
+                )
+                evaluations.append(entry)
+                continue
+
+            if src_coord is None:
+                # Source itself could not be resolved: nothing to measure from.
+                entry.update(
+                    {
+                        "latitude": coord.latitude,
+                        "longitude": coord.longitude,
+                        "coordinate_source": origin,
+                        "status": "unresolved",
+                        "detail": "Source coordinates could not be resolved",
+                        "distance_km": None,
+                        "within_radius": None,
+                        "geographic_score": None,
+                        "feasibility": None,
+                        "map_data": None,
+                    }
+                )
+                evaluations.append(entry)
+                continue
+
+            km = distance_between(src_coord, coord)
+            verdict = evaluate_distance(km, effective.max_radius_km, effective)
+            md = {
+                "source": {
+                    "name": source_out.get("name"),
+                    "latitude": src_coord.latitude,
+                    "longitude": src_coord.longitude,
+                },
+                "consumer": {
+                    "name": entry["consumer_name"],
+                    "latitude": coord.latitude,
+                    "longitude": coord.longitude,
+                },
+                "distance_km": verdict["distance_km"],
+                "method": "haversine",
+            }
+            entry.update(
+                {
+                    "latitude": coord.latitude,
+                    "longitude": coord.longitude,
+                    "coordinate_source": origin,
+                    "distance_km": verdict["distance_km"],
+                    "within_radius": verdict["within_radius"],
+                    "geographic_score": verdict["geographic_score"],
+                    "feasibility": verdict["feasibility"],
+                    "map_data": md,
+                    "status": "ok",
+                    "detail": None,
+                }
+            )
+            evaluations.append(entry)
+
+        # Nearest first; unresolved entries keep input order at the end.
+        evaluations.sort(
+            key=lambda e: (
+                e["distance_km"] is None,
+                e["distance_km"] if e["distance_km"] is not None else 0.0,
+            )
+        )
+
+        evaluated = sum(1 for e in evaluations if e["status"] == "ok")
+        return {
+            "source": source_out,
+            "max_radius_km": effective.max_radius_km,
+            "potential_uses": list(potential_uses or []),
+            "count": len(evaluations),
+            "evaluated": evaluated,
+            "matches": evaluations,
+        }
 
     # ------------------------------------------------------------------ #
     # FEATURE 7 - map-ready output
