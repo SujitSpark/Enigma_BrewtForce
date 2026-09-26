@@ -4,22 +4,23 @@ import { STATUS_LABEL, fmt, inr, tonnes, withOrigin } from '../format';
 import NetworkMap, { MapLegend } from '../components/NetworkMap';
 import OpportunityDetail from '../components/OpportunityDetail';
 import OpportunityList from '../components/OpportunityList';
+import { Counter } from '../components/Motion';
 
 export function Kpis({ t }) {
   const items = [
-    { label: 'Waste available', value: tonnes(t.waste_available_tpy), sub: `${t.streams} by-product streams / yr` },
-    { label: 'Potentially diverted', value: tonnes(t.potentially_diverted_tpy), sub: `${Math.round((100 * t.potentially_diverted_tpy) / Math.max(1, t.waste_available_tpy))}% of available` },
-    { label: 'Net CO₂ impact', value: `${tonnes(t.net_tco2e_per_year)}CO₂e`, sub: 'per year, after transport' },
-    { label: 'Economic opportunity', value: inr(t.net_inr_per_year), sub: 'per year, estimated' },
-    { label: 'Opportunities', value: fmt(t.opportunities), sub: `${t.by_category.direct} direct · ${t.by_category.multi_step} multi-step · ${t.by_category.hidden} hidden` },
-    { label: 'Active exchanges', value: fmt(t.active_exchanges), sub: `${t.awaiting_response} awaiting response` },
+    { label: 'Waste available', value: t.waste_available_tpy, format: tonnes, sub: `${t.streams} by-product streams / yr` },
+    { label: 'Potentially diverted', value: t.potentially_diverted_tpy, format: tonnes, sub: `${Math.round((100 * t.potentially_diverted_tpy) / Math.max(1, t.waste_available_tpy))}% of available` },
+    { label: 'Net CO₂ impact', value: t.net_tco2e_per_year, format: (v) => `${tonnes(v)}CO₂e`, sub: 'per year, after transport' },
+    { label: 'Economic opportunity', value: t.net_inr_per_year, format: inr, sub: 'per year, estimated' },
+    { label: 'Opportunities', value: t.opportunities, format: fmt, sub: `${t.by_category.direct} direct · ${t.by_category.multi_step} multi-step · ${t.by_category.hidden} hidden` },
+    { label: 'Active exchanges', value: t.active_exchanges, format: fmt, sub: `${t.awaiting_response} awaiting response` },
   ];
   return (
     <div className="kpis" role="list" aria-label="Network totals">
       {items.map((k) => (
         <div className="kpi" role="listitem" key={k.label}>
           <div className="kpi-label">{k.label}</div>
-          <div className="kpi-value">{k.value}</div>
+          <div className="kpi-value"><Counter value={k.value} format={k.format} /></div>
           <div className="kpi-sub">{k.sub}</div>
         </div>
       ))}

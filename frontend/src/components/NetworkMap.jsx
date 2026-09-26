@@ -107,13 +107,14 @@ export default function NetworkMap({ opportunities, selectedId, onSelect, hero =
           const dim = selectedId && !active;
           return routeOf(o).map((line, i) => (
             <Polyline
-              key={`${o.id}-${i}`}
+              key={`${o.id}-${i}-${active ? 'on' : 'off'}`}
               positions={line}
               pathOptions={{
                 color: catColor[o.category],
                 weight: active ? 4 : 2,
                 opacity: dim ? 0.18 : active ? 1 : 0.6,
                 dashArray: o.pathway_type === 'missing_hub' ? '6 6' : null,
+                className: `flow${active ? ' active' : ''}${o.pathway_type === 'missing_hub' ? ' missing' : ''}`,
               }}
               eventHandlers={{ click: () => onSelect?.(o.id) }}
             >
@@ -135,6 +136,7 @@ export default function NetworkMap({ opportunities, selectedId, onSelect, hero =
               fillOpacity: 0.95,
               weight: n.role === 'proposed' ? 2.5 : 1.5,
               dashArray: n.role === 'proposed' ? '3 3' : null,
+              className: `map-node map-${n.role}`,
             }}
           >
             <Tooltip className="map-tip"><b>{n.name}</b><br />{n.sub}</Tooltip>

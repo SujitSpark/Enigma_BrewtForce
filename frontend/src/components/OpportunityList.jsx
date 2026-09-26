@@ -34,11 +34,11 @@ export default function OpportunityList({ opportunities, selectedId, onSelect, s
       {shown.length === 0 ? (
         <p className="empty">No opportunities in this category.</p>
       ) : (
-        <ul className="opp-list" role="listbox" aria-label={title} style={maxHeight ? { maxHeight, overflow: 'auto' } : undefined}>
-          {shown.map((o) => (
-            <li key={o.id}>
+        <ul className="opp-list" key={filter} role="listbox" aria-label={title} style={maxHeight ? { maxHeight, overflow: 'auto' } : undefined}>
+          {shown.map((o, i) => (
+            <li key={o.id} style={{ '--i': Math.min(i, 14) }}>
               <button type="button" className="opp" role="option" aria-selected={o.id === selectedId} onClick={() => onSelect(o.id)}>
-                <span className="score">{o.score}<small>SCORE</small></span>
+                <span className="score-ring" style={{ '--p': o.score }} aria-label={`Score ${o.score}`}><b>{o.score}</b></span>
                 <span style={{ minWidth: 0 }}>
                   <span className="opp-name">{o.title}</span>
                   <span className="opp-sub">

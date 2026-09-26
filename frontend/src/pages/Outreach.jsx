@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../api';
 import { PATHWAY_LABEL, STATUS_LABEL, inr } from '../format';
 import { StatusTag } from '../components/OpportunityList';
+import { Counter } from '../components/Motion';
 
 function Editor({ rec, smtp, onSaved }) {
   const [form, setForm] = useState({ recipient_email: '', subject: '', body: '', response_note: '' });
@@ -113,7 +114,7 @@ export default function Outreach({ records, selectedId, onSelect, onSaved, smtp 
     <div className="page">
       <div className="kpis" style={{ gridTemplateColumns: 'repeat(5, minmax(0,1fr))' }}>
         {Object.entries(STATUS_LABEL).map(([k, v]) => (
-          <div className="kpi" key={k}><div className="kpi-label">{v}</div><div className="kpi-value">{counts[k] || 0}</div></div>
+          <div className="kpi" key={k}><div className="kpi-label">{v}</div><div className="kpi-value"><Counter value={counts[k] || 0} /></div></div>
         ))}
       </div>
       {records.length === 0 ? (

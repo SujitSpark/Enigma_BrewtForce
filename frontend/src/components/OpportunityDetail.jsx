@@ -1,5 +1,6 @@
 import { CATEGORY_LABEL, DIM_LABEL, MONTHS, PATHWAY_LABEL, fmt, inr } from '../format';
 import { CategoryTag, StatusTag } from './OpportunityList';
+import { Counter } from './Motion';
 
 const ICON = { ok: '✓', warn: '!', bad: '×' };
 
@@ -104,7 +105,7 @@ export default function OpportunityDetail({ o, outreachRec, onStartOutreach, bus
   const { impact, economics: e, volume, dimensions, weights } = o;
 
   return (
-    <article className="panel" aria-label={`Opportunity: ${o.title}`}>
+    <article className="panel detail-anim" key={o.id} aria-label={`Opportunity: ${o.title}`}>
       <div className="panel-head">
         <span style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <span className="panel-title">{o.title}</span>
@@ -138,7 +139,7 @@ export default function OpportunityDetail({ o, outreachRec, onStartOutreach, bus
         <section>
           <span className="eyebrow">Opportunity score</span>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 2 }}>
-            <span className="big">{o.score}<span className="big-unit">/ 100</span></span>
+            <span className="big"><Counter value={o.score} duration={900} /><span className="big-unit">/ 100</span></span>
             <span className="tag">{o.feasibility}</span>
             {o.feedback_multiplier !== 1 && <span className="tag" title="Adjusted by past industry responses">×{o.feedback_multiplier} feedback</span>}
           </div>
@@ -146,8 +147,8 @@ export default function OpportunityDetail({ o, outreachRec, onStartOutreach, bus
             <div className="dim-row" role="row" style={{ color: 'var(--muted)', fontSize: 11 }}>
               <span role="columnheader">Dimension</span><span /><span role="columnheader" className="num" style={{ color: 'var(--muted)' }}>Score</span><span role="columnheader" className="w">Wt</span>
             </div>
-            {Object.keys(DIM_LABEL).map((k) => (
-              <div className="dim-row" role="row" key={k}>
+            {Object.keys(DIM_LABEL).map((k, i) => (
+              <div className="dim-row" role="row" key={k} style={{ '--i': i }}>
                 <span role="cell">{DIM_LABEL[k]}</span>
                 <span className="dim-bar" aria-hidden="true"><span style={{ width: `${dimensions[k]}%` }} /></span>
                 <span className="num" role="cell">{dimensions[k]}</span>
@@ -173,7 +174,7 @@ export default function OpportunityDetail({ o, outreachRec, onStartOutreach, bus
         <section>
           <span className="eyebrow">Environmental impact · tCO₂e / year</span>
           <div style={{ marginTop: 2 }}>
-            <span className="big">{fmt(impact.net_tco2e_per_year)}</span><span className="big-unit">net</span>
+            <span className="big"><Counter value={impact.net_tco2e_per_year} format={(v) => fmt(v)} /></span><span className="big-unit">net</span>
           </div>
           <Waterfall
             label="Carbon balance"
@@ -195,7 +196,7 @@ export default function OpportunityDetail({ o, outreachRec, onStartOutreach, bus
         <section>
           <span className="eyebrow">Economic opportunity · per year</span>
           <div style={{ marginTop: 2 }}>
-            <span className="big">{inr(e.net_inr_per_year)}</span><span className="big-unit">net · {inr(e.net_inr_per_t)}/t</span>
+            <span className="big"><Counter value={e.net_inr_per_year} format={inr} /></span><span className="big-unit">net · {inr(e.net_inr_per_t)}/t</span>
           </div>
           <Waterfall
             label="Business case"

@@ -90,7 +90,7 @@ export default function Network({ meta, outreachByOpp, onStartOutreach, busy, re
         {!data && !error && <div className="panel-body"><div className="skeleton" style={{ height: 300 }} /></div>}
         {data && (
           <div style={{ overflowX: 'auto' }}>
-            <svg className="graph" viewBox={`0 0 ${W} ${graph.H}`} style={{ minWidth: 900 }} role="img"
+            <svg className="graph" key={mat} viewBox={`0 0 ${W} ${graph.H}`} style={{ minWidth: 900 }} role="img"
               aria-label={`Ecosystem graph: ${graph.counts.src} sources, ${graph.counts.hub} processing hubs, ${graph.counts.dst} consumers`}>
               <text className="col-title" x={X.src} y={20} textAnchor="end">Sources · {graph.counts.src}</text>
               <text className="col-title" x={X.hub} y={20} textAnchor="middle">Processing hubs · {graph.counts.hub}</text>
@@ -109,10 +109,10 @@ export default function Network({ meta, outreachByOpp, onStartOutreach, busy, re
                   );
                 })}
               </g>
-              {Object.values(graph.pos).map((p) => {
+              {Object.values(graph.pos).map((p, ni) => {
                 const fill = p.col === 'src' ? 'var(--producer)' : p.col === 'dst' ? 'var(--consumer)' : p.proposed ? 'var(--surface)' : 'var(--hub)';
                 return (
-                  <g key={p.key} className="node" onMouseEnter={() => setHover(p.key)} onMouseLeave={() => setHover(null)}
+                  <g key={p.key} className="node" style={{ animationDelay: `${Math.min(ni, 40) * 25}ms` }} onMouseEnter={() => setHover(p.key)} onMouseLeave={() => setHover(null)}
                     onFocus={() => setHover(p.key)} onBlur={() => setHover(null)} tabIndex={0}>
                     <rect x={p.x - 5} y={p.y - 8} width={10} height={16} rx={3}
                       style={{ fill, stroke: p.proposed ? 'var(--hidden)' : 'none' }} strokeDasharray={p.proposed ? '3 2' : undefined} strokeWidth={1.5} />
