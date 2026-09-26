@@ -22,10 +22,13 @@ from backend.gis.schemas import (
     Industry,
     NearbyItem,
     NearbyResponse,
+    NearestResponse,
     OpportunitiesRequest,
     OpportunitiesResponse,
+    SummaryResponse,
 )
 from backend.gis.service import GISService, IndustryNotFoundError, get_default_service
+from backend.gis.service import MAX_NEAREST_LIMIT
 
 router = APIRouter(tags=["GIS / Location Intelligence"])
 
@@ -68,6 +71,37 @@ def list_industries() -> List[Industry]:
 def get_industry(industry_id: str) -> Industry:
     try:
         return get_service().get_industry(industry_id)
+    except IndustryNotFoundError as exc:
+        raise _not_found(exc)
+
+
+# --------------------------------------------------------------------------- #
+# Dataset summary (purely geographic/data-oriented)
+# --------------------------------------------------------------------------- #
+@router.get(
+    "/summary",
+    response_model=SummaryResponse,
+    summary="GIS-level dataset statistics (counts, distances, coverage)",
+)
+def get_summary() -> SummaryResponse:
+    return SummaryResponse(**get_service().summary())
+
+
+# --------------------------------------------------------------------------- #
+# Nearest industries
+# --------------------------------------------------------------------------- #
+@router.get(
+    "/nearest/{industry_id}",
+    response_model=NearestResponse,
+    responses={404: {"model": ErrorResponse}},
+    summary="Nearest industries to a given industry, sorted by distance",
+)
+def get_nearest(
+    industry_id: str,
+    limit: int = Query(5, ge=1, le=MAX_NEAREST_LIMIT, description="Max results (1-25)"),
+) -> NearestResponse:
+    try:
+        return NearestResponse(**get_service().nearest(industry_id, limit))
     except IndustryNotFoundError as exc:
         raise _not_found(exc)
 

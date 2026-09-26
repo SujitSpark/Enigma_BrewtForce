@@ -38,6 +38,10 @@ class IndustryNotFoundError(KeyError):
 # Default dataset lives next to this package, in backend/data/.
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "industries.json"
 
+# Caps for the /gis/nearest endpoint.
+MAX_NEAREST_LIMIT = 25
+MAX_NEAREST_RADIUS_KM = 20000.0  # km, ~half the Earth's circumference
+
 
 def load_industries(path: Optional[Path | str] = None) -> Dict[str, Industry]:
     """Load and validate the prototype industry dataset.
@@ -425,6 +429,89 @@ class GISService:
             "count": len(evaluations),
             "evaluated": evaluated,
             "matches": evaluations,
+        }
+
+    # ------------------------------------------------------------------ #
+    # Dataset statistics (purely geographic/data-oriented)
+    # ------------------------------------------------------------------ #
+    def summary(self) -> dict:
+        """GIS-level statistics over the loaded dataset.
+
+        Purely geographic/data-oriented: counts, distances, coverage. It does
+        NOT compute environmental impact, CO2 savings, or scheme eligibility.
+        """
+        industries = self.list_industries()
+        total = len(industries)
+        pairs = total * (total - 1) // 2
+
+        # Pairwise distances (N is small for the prototype, O(N^2) is fine).
+        coords = [i.coordinate for i in industries]
+        distances = [
+            distance_between(coords[a], coords[b])
+            for a in range(total)
+            for b in range(a + 1, total)
+        ]
+        avg = round(sum(distances) / len(distances), 2) if distances else 0.0
+        max_pair = max(distances) if distances else 0.0
+
+        by_type: Dict[str, int] = {}
+        for i in industries:
+            by_type[i.industry_type] = by_type.get(i.industry_type, 0) + 1
+
+        cities = sorted({i.city for i in industries})
+
+        return {
+            "total_industries": total,
+            "industries_with_coordinates": sum(
+                1
+                for i in industries
+                if i.latitude is not None and i.longitude is not None
+            ),
+            "total_possible_connections": pairs,
+            "average_distance_km": avg,
+            "max_pairwise_distance_km": round(max_pair, 2),
+            "industries_by_type": dict(sorted(by_type.items())),
+            "cities": cities,
+            "cities_covered": len(cities),
+        }
+
+    def nearest(self, industry_id: str, limit: int = 5) -> dict:
+        """Nearest industries to a given one, sorted by distance ascending.
+
+        The source industry itself is always excluded.
+        """
+        if limit < 1:
+            raise ValueError("limit must be >= 1")
+        if limit > MAX_NEAREST_LIMIT:
+            raise ValueError(f"limit must be <= {MAX_NEAREST_LIMIT}")
+
+        source = self.get_industry(industry_id)
+        items = find_nearby(
+            source=source,
+            industries=self.list_industries(),
+            radius_km=MAX_NEAREST_RADIUS_KM,  # effectively unbounded
+            config=self.config,
+            include_outside_radius=True,
+        )
+        nearest = items[:limit]
+        return {
+            "source": {"id": source.id, "name": source.name},
+            "count": len(nearest),
+            "limit": limit,
+            "nearest_industries": [
+                {
+                    "id": n.industry_id,
+                    "name": n.name,
+                    "industry_type": n.industry_type,
+                    "city": n.city,
+                    "latitude": n.latitude,
+                    "longitude": n.longitude,
+                    "distance_km": n.distance_km,
+                    "geographic_score": n.geographic_score,
+                    "feasibility": n.feasibility,
+                }
+                for n in nearest
+            ],
         }
 
     # ------------------------------------------------------------------ #

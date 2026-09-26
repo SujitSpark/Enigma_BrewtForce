@@ -15,13 +15,17 @@ geographic questions of the project:
 - What would the road distance be? (pluggable routing, straight-line by default)
 
 > **Scope note:** This module contains **no** NLP, no AI matching, no material
-> compatibility logic, no environmental-impact maths, no scheme matching, no
-> email/outreach, and **no frontend**. Those belong to other team members. GIS
-> only answers *where* and *how far*.
+> compatibility logic, no environmental-impact maths, no government-scheme
+> matching, no email/outreach, and **no frontend**. Those belong to other team
+> members. GIS only answers *where* and *how far*.
+>
+> **Government scheme matching and environmental impact calculations are
+> outside the GIS module and are handled by the corresponding modules.**
 
-> **Data note:** All bundled industry records are **DEMO / PROTOTYPE DATA**.
-> Names like "ABC Steel (DEMO)" are illustrative placeholders. They are **not**
-> verified real industrial partners.
+> **Data note:** All bundled industry records are **SYNTHETIC / DEMO /
+> PROTOTYPE DATA**. Names like "ABC Steel (DEMO)" are illustrative placeholders
+> generated for the hackathon. They are **not** real companies, **not** verified
+> industrial partners, and no real company relationships are represented.
 
 ---
 
@@ -80,8 +84,10 @@ uvicorn backend.main:app --reload
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/gis/health` | Module health + dataset size |
+| GET | `/gis/summary` | Dataset statistics (counts, distances, coverage) |
 | GET | `/gis/industries` | List all industries |
 | GET | `/gis/industry/{industry_id}` | One industry with coordinates |
+| GET | `/gis/nearest/{industry_id}?limit=5` | Nearest industries, sorted by distance |
 | GET | `/gis/nearby/{industry_id}?radius_km=50` | Nearby industries (path form) |
 | GET | `/gis/nearby?industry_id=IND001&radius_km=50` | Nearby industries (query form) |
 | POST | `/gis/distance` | Distance between two coordinate pairs |
@@ -92,6 +98,43 @@ uvicorn backend.main:app --reload
 | GET | `/gis/route/{source_id}/{consumer_id}?provider=straight_line` | Route info |
 
 ### Examples
+
+**GET** `/gis/summary` — purely geographic/dataset statistics. Contains **no**
+environmental impact, CO2, or scheme content.
+
+```json
+{
+  "total_industries": 25,
+  "industries_with_coordinates": 25,
+  "total_possible_connections": 300,
+  "average_distance_km": 173.4,
+  "max_pairwise_distance_km": 837.25,
+  "industries_by_type": {"Cement": 2, "Chemical": 2, "Food Processing": 2, "Steel": 2, "...": "..."},
+  "cities": ["Ahmednagar", "Amravati", "Aurangabad", "..."],
+  "cities_covered": 21
+}
+```
+
+**GET** `/gis/nearest/IND001?limit=5` — answers "what is geographically close
+to this industry?", independent of any matching supplied by Person 1. Source
+industry is excluded; results are ascending by distance; `limit` is validated
+(1–25); unknown ids return 404.
+
+```json
+{
+  "source": {"id": "IND001", "name": "ABC Steel (DEMO)"},
+  "count": 5,
+  "limit": 5,
+  "nearest_industries": [
+    {
+      "id": "IND015", "name": "Pune Bioenergy (DEMO)",
+      "industry_type": "Bioenergy", "city": "Pune",
+      "latitude": 18.5018, "longitude": 73.8636,
+      "distance_km": 2.19, "geographic_score": 99, "feasibility": "VERY_HIGH"
+    }
+  ]
+}
+```
 
 **GET** `/gis/industry/IND001`
 
@@ -255,6 +298,65 @@ dataset, no coordinates, unknown city) gets `"status": "unresolved"` with a
 `detail` reason and null GIS fields — the request never fails wholesale.
 `potential_uses` is echoed untouched; use/material compatibility stays with
 Person 1.
+
+---
+
+## 4b. Radius filtering demonstration
+
+The nearby endpoints accept any `radius_km`; the demo radii below all work out
+of the box (numbers illustrative; query the API for live values):
+
+| Call | Expectation |
+|---|---|
+| `GET /gis/nearby/IND001?radius_km=10` | Only very close neighbours (Pune cluster) |
+| `GET /gis/nearby/IND001?radius_km=25` | Adds Chakan / Talegaon ring |
+| `GET /gis/nearby/IND001?radius_km=50` | Adds Pimpri-Chinchwad and Lonavala edge |
+| `GET /gis/nearby/IND001?radius_km=100` | Adds the wider Pune-region corridor |
+
+Every result carries `distance_km`, `within_radius`, `geographic_score` and
+`feasibility`, and the boundary is **inclusive** (`distance == radius` counts
+as within). Results are sorted nearest-first.
+
+The scoring bands and anchors are **prototype heuristics chosen for the demo**
+— they are **not** a government-defined score and are fully configurable in
+`backend/gis/config.py`.
+
+---
+
+## 4c. Consuming GIS output from other modules
+
+### Person 2 — environmental impact + government scheme matching
+
+Government scheme matching and environmental impact calculations are outside
+the GIS module and are handled by the corresponding modules. GIS deliberately
+supplies **only** the geographic inputs:
+
+- `distance_km` — Haversine straight-line distance for transport estimates
+- `method` — always `"haversine"` (labels the baseline)
+- `within_radius`, `geographic_score`, `feasibility` — geography-only ranking
+  hints; Person 2 layers impact/scheme logic on top
+- `map_data` — coordinates for visualisation
+
+Recommended call: `POST /gis/evaluate` (single pair) or
+`POST /gis/evaluate-matches` (batch). GIS never computes CO2, savings, or
+scheme eligibility itself.
+
+### Frontend / Person 4 — `map_data`
+
+Every evaluate/evaluate-matches response embeds a `map_data` object shaped for
+direct Leaflet (or any map library) consumption:
+
+```json
+{
+  "source":   {"name": "ABC Steel (DEMO)", "latitude": 18.5204, "longitude": 73.8567},
+  "consumer": {"name": "XYZ Cement (DEMO)", "latitude": 18.6279, "longitude": 73.8009},
+  "distance_km": 13.32,
+  "method": "haversine"
+}
+```
+
+Use `latitude`/`longitude` for markers and `distance_km` for a polyline label.
+`GET /gis/map/{source_id}/{consumer_id}` returns the same shape standalone.
 
 ---
 

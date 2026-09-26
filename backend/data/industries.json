@@ -155,6 +155,106 @@
       "longitude": 73.8636,
       "materials": ["Organic waste", "Bagasse"],
       "byproducts": ["Digestate", "Biogas"]
+    },
+    {
+      "id": "IND016",
+      "name": "Nagpur Steel & Alloys (DEMO)",
+      "industry_type": "Steel",
+      "city": "Nagpur",
+      "latitude": 21.1458,
+      "longitude": 79.0882,
+      "materials": ["Iron ore", "Scrap"],
+      "byproducts": ["Slag", "Scale"]
+    },
+    {
+      "id": "IND017",
+      "name": "Chinchwad Manufacturing Works (DEMO)",
+      "industry_type": "Manufacturing",
+      "city": "Pimpri-Chinchwad",
+      "latitude": 18.6410,
+      "longitude": 73.8070,
+      "materials": ["Steel", "Aluminium"],
+      "byproducts": ["Metal turnings", "Coolant waste"]
+    },
+    {
+      "id": "IND018",
+      "name": "Marathwada Glass Works (DEMO)",
+      "industry_type": "Glass",
+      "city": "Chhatrapati Sambhajinagar",
+      "latitude": 19.9500,
+      "longitude": 75.3100,
+      "materials": ["Silica sand", "Soda ash"],
+      "byproducts": ["Cullet", "Glass dust"]
+    },
+    {
+      "id": "IND019",
+      "name": "Godavari Food Processing (DEMO)",
+      "industry_type": "Food Processing",
+      "city": "Nashik",
+      "latitude": 19.9510,
+      "longitude": 73.8250,
+      "materials": ["Grapes", "Onions"],
+      "byproducts": ["Peels", "Organic waste"]
+    },
+    {
+      "id": "IND020",
+      "name": "Alibag Marine Chemicals (DEMO)",
+      "industry_type": "Chemical",
+      "city": "Raigad",
+      "latitude": 18.6410,
+      "longitude": 72.8720,
+      "materials": ["Salt", "Solvents"],
+      "byproducts": ["Brine", "Spent solvents"]
+    },
+    {
+      "id": "IND021",
+      "name": "Roha Manufacturing Park (DEMO)",
+      "industry_type": "Manufacturing",
+      "city": "Raigad",
+      "latitude": 18.4400,
+      "longitude": 73.1200,
+      "materials": ["Steel", "Plastics"],
+      "byproducts": ["Packaging waste", "Metal scrap"]
+    },
+    {
+      "id": "IND022",
+      "name": "Sangli Agro Foods (DEMO)",
+      "industry_type": "Food Processing",
+      "city": "Sangli",
+      "latitude": 16.8524,
+      "longitude": 74.5815,
+      "materials": ["Turmeric", "Grapes"],
+      "byproducts": ["Press cake", "Organic waste"]
+    },
+    {
+      "id": "IND023",
+      "name": "Amravati Cotton Mills (DEMO)",
+      "industry_type": "Textile",
+      "city": "Amravati",
+      "latitude": 20.9374,
+      "longitude": 77.7796,
+      "materials": ["Cotton"],
+      "byproducts": ["Cotton waste", "Dye sludge"]
+    },
+    {
+      "id": "IND024",
+      "name": "Baramati Agro Industries (DEMO)",
+      "industry_type": "Agro-processing",
+      "city": "Baramati",
+      "latitude": 18.1514,
+      "longitude": 74.5773,
+      "materials": ["Sugarcane", "Grain"],
+      "byproducts": ["Bagasse", "Husk"]
+    },
+    {
+      "id": "IND025",
+      "name": "Chandrapur Cement Works (DEMO)",
+      "industry_type": "Cement",
+      "city": "Chandrapur",
+      "latitude": 19.9700,
+      "longitude": 79.3000,
+      "materials": ["Limestone", "Fly ash"],
+      "byproducts": ["Kiln dust"]
     }
   ]
 }

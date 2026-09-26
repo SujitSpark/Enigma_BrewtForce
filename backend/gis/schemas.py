@@ -248,5 +248,40 @@ class EvaluateMatchesResponse(BaseModel):
     matches: List[MatchEvaluation]
 
 
+# --------------------------------------------------------------------------- #
+# Dataset summary + nearest-industries
+# --------------------------------------------------------------------------- #
+class SummaryResponse(BaseModel):
+    """Purely geographic/dataset statistics. No impact or scheme content."""
+
+    total_industries: int
+    industries_with_coordinates: int
+    total_possible_connections: int
+    average_distance_km: float
+    max_pairwise_distance_km: float
+    industries_by_type: dict
+    cities: List[str]
+    cities_covered: int
+
+
+class NearestIndustryItem(BaseModel):
+    id: str
+    name: str
+    industry_type: Optional[str] = None
+    city: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    distance_km: float
+    geographic_score: int
+    feasibility: str
+
+
+class NearestResponse(BaseModel):
+    source: dict
+    count: int
+    limit: int
+    nearest_industries: List[NearestIndustryItem]
+
+
 class ErrorResponse(BaseModel):
     detail: str
