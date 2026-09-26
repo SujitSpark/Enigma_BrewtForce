@@ -1,0 +1,160 @@
+{
+  "_meta": {
+    "dataset": "DEMO / PROTOTYPE DATA",
+    "disclaimer": "All company names and coordinates are illustrative placeholders for the hackathon prototype. They are NOT verified real industrial partners and must not be presented as real factories or partnerships.",
+    "region": "Maharashtra, India (Pune / Mumbai / Nashik corridor)",
+    "coordinate_system": "WGS84 (EPSG:4326)"
+  },
+  "industries": [
+    {
+      "id": "IND001",
+      "name": "ABC Steel (DEMO)",
+      "industry_type": "Steel",
+      "city": "Pune",
+      "latitude": 18.5204,
+      "longitude": 73.8567,
+      "materials": ["Steel scrap", "Finished steel"],
+      "byproducts": ["Slag", "Mill scale"]
+    },
+    {
+      "id": "IND002",
+      "name": "XYZ Cement (DEMO)",
+      "industry_type": "Cement",
+      "city": "Pimpri-Chinchwad",
+      "latitude": 18.6279,
+      "longitude": 73.8009,
+      "materials": ["Limestone", "Gypsum"],
+      "byproducts": ["Cement kiln dust"]
+    },
+    {
+      "id": "IND003",
+      "name": "Deccan Foundry (DEMO)",
+      "industry_type": "Foundry",
+      "city": "Chakan",
+      "latitude": 18.7606,
+      "longitude": 73.8636,
+      "materials": ["Pig iron", "Scrap"],
+      "byproducts": ["Waste foundry sand", "Slag"]
+    },
+    {
+      "id": "IND004",
+      "name": "Sahyadri Construction (DEMO)",
+      "industry_type": "Construction",
+      "city": "Talegaon",
+      "latitude": 18.7350,
+      "longitude": 73.6757,
+      "materials": ["Cement", "Aggregates", "Ready-mix concrete"],
+      "byproducts": ["Construction & demolition waste"]
+    },
+    {
+      "id": "IND005",
+      "name": "GreenRoad Materials (DEMO)",
+      "industry_type": "Road Material",
+      "city": "Lonavala",
+      "latitude": 18.7546,
+      "longitude": 73.4062,
+      "materials": ["Fly ash", "Slag", "Aggregates"],
+      "byproducts": ["Rejected asphalt"]
+    },
+    {
+      "id": "IND006",
+      "name": "Konkan Paper Mills (DEMO)",
+      "industry_type": "Paper",
+      "city": "Navi Mumbai",
+      "latitude": 19.0330,
+      "longitude": 73.0297,
+      "materials": ["Wood pulp", "Waste paper"],
+      "byproducts": ["Paper sludge", "Lime mud"]
+    },
+    {
+      "id": "IND007",
+      "name": "Tarapur Thermal Power (DEMO)",
+      "industry_type": "Power",
+      "city": "Thane",
+      "latitude": 19.2183,
+      "longitude": 72.9781,
+      "materials": ["Coal"],
+      "byproducts": ["Fly ash", "Bottom ash", "Gypsum"]
+    },
+    {
+      "id": "IND008",
+      "name": "Godavari Sugars (DEMO)",
+      "industry_type": "Sugar",
+      "city": "Ahmednagar",
+      "latitude": 19.0948,
+      "longitude": 74.7480,
+      "materials": ["Sugarcane"],
+      "byproducts": ["Bagasse", "Molasses", "Press mud"]
+    },
+    {
+      "id": "IND009",
+      "name": "Panchvati Chemicals (DEMO)",
+      "industry_type": "Chemical",
+      "city": "Nashik",
+      "latitude": 19.9975,
+      "longitude": 73.7898,
+      "materials": ["Solvents", "Acids"],
+      "byproducts": ["Spent acid", "Waste solvents"]
+    },
+    {
+      "id": "IND010",
+      "name": "Bhima Textiles (DEMO)",
+      "industry_type": "Textile",
+      "city": "Solapur",
+      "latitude": 17.6599,
+      "longitude": 75.9064,
+      "materials": ["Cotton", "Dyes"],
+      "byproducts": ["Cotton waste", "Dye sludge"]
+    },
+    {
+      "id": "IND011",
+      "name": "Rankala Recyclers (DEMO)",
+      "industry_type": "Recycling",
+      "city": "Kolhapur",
+      "latitude": 16.7050,
+      "longitude": 74.2433,
+      "materials": ["Scrap metal", "Waste plastic"],
+      "byproducts": ["Recycled pellets"]
+    },
+    {
+      "id": "IND012",
+      "name": "Krishna Agro (DEMO)",
+      "industry_type": "Agro-processing",
+      "city": "Satara",
+      "latitude": 17.6805,
+      "longitude": 74.0183,
+      "materials": ["Grain", "Oilseeds"],
+      "byproducts": ["Husk", "Oil cake"]
+    },
+    {
+      "id": "IND013",
+      "name": "Ellora Auto Components (DEMO)",
+      "industry_type": "Automotive",
+      "city": "Aurangabad",
+      "latitude": 19.8762,
+      "longitude": 75.3433,
+      "materials": ["Steel", "Aluminium", "Plastics"],
+      "byproducts": ["Metal turnings", "Paint sludge"]
+    },
+    {
+      "id": "IND014",
+      "name": "Vashi Logistics Park (DEMO)",
+      "industry_type": "Logistics",
+      "city": "Mumbai",
+      "latitude": 19.0760,
+      "longitude": 72.8777,
+      "materials": ["Packaging", "Diesel"],
+      "byproducts": ["Packaging waste"]
+    },
+    {
+      "id": "IND015",
+      "name": "Pune Bioenergy (DEMO)",
+      "industry_type": "Bioenergy",
+      "city": "Pune",
+      "latitude": 18.5018,
+      "longitude": 73.8636,
+      "materials": ["Organic waste", "Bagasse"],
+      "byproducts": ["Digestate", "Biogas"]
+    }
+  ]
+}

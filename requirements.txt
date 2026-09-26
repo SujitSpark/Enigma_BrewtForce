@@ -1,0 +1,11 @@
+# GIS / Location Intelligence module (Person 3) - lightweight, no GPU, no paid APIs.
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.5
+
+# --- Test / dev only ---
+pytest>=8.0
+httpx>=0.27          # required by fastapi.testclient
+
+# --- OPTIONAL, not required by any core GIS feature ---
+# geopy>=2.4         # enables city -> coordinates geocoding (network dependent)
