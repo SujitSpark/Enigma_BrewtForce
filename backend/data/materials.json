@@ -1,0 +1,734 @@
+{
+  "_meta": {
+    "note": "All factors and prices are indicative screening values (order-of-magnitude, India, recent years), not verified LCA or market quotes. Replace with plant-specific data before any claim.",
+    "units": {
+      "avoided_tco2e_per_t": "tCO2e avoided per tonne of by-product used in place of the virgin input",
+      "substitution_ratio": "tonnes of virgin input replaced per tonne of by-product",
+      "virgin_price_inr_per_t": "indicative price of the virgin input replaced",
+      "disposal_cost_inr_per_t": "indicative cost the generator avoids when the stream is not landfilled/ponded",
+      "byproduct_price_inr_per_t": "indicative sale price of the by-product (a transfer between the two parties)",
+      "typical_demand_tpm": "indicative monthly demand of one consumer of this type",
+      "max_radius_km": "indicative economic road radius for this material"
+    }
+  },
+  "defaults": {
+    "transport_inr_per_tkm": 3.5,
+    "transport_tco2e_per_tkm": 8e-05,
+    "road_circuity_factor": 1.3,
+    "handling_tco2e_per_t": 0.001,
+    "weights": {
+      "material": 25,
+      "quantity": 15,
+      "geography": 15,
+      "processing": 10,
+      "timing": 10,
+      "environment": 15,
+      "economics": 10
+    }
+  },
+  "demand_seasonality": {
+    "_note": "Relative monthly activity Jan..Dec. Road works and brick making slow down in the monsoon.",
+    "Road construction": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0.4,
+      0.3,
+      0.3,
+      0.5,
+      1,
+      1,
+      1
+    ],
+    "Bricks & blocks": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0.6,
+      0.4,
+      0.4,
+      0.6,
+      1,
+      1,
+      1
+    ],
+    "default": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "processing_steps": {
+    "ggbs_grinding": {
+      "short": "GGBS grinding",
+      "label": "Drying & grinding to GGBS fineness",
+      "cost_inr_per_t": 700,
+      "tco2e_per_t": 0.03
+    },
+    "slag_processing": {
+      "short": "Slag processing",
+      "label": "Weathering (≥ 3 months), crushing & magnetic separation",
+      "cost_inr_per_t": 250,
+      "tco2e_per_t": 0.004
+    },
+    "slag_crushing": {
+      "short": "Slag crushing",
+      "label": "Crushing to raw-mix size",
+      "cost_inr_per_t": 100,
+      "tco2e_per_t": 0.003
+    },
+    "ash_classification": {
+      "short": "Fly ash classification",
+      "label": "Air classification to IS 3812 grade",
+      "cost_inr_per_t": 150,
+      "tco2e_per_t": 0.005
+    },
+    "sand_reclamation": {
+      "short": "Sand reclamation",
+      "label": "Mechanical/thermal reclamation & binder removal",
+      "cost_inr_per_t": 600,
+      "tco2e_per_t": 0.02
+    },
+    "cd_recycling": {
+      "short": "C&D recycling",
+      "label": "Sorting, crushing & screening to recycled aggregate",
+      "cost_inr_per_t": 300,
+      "tco2e_per_t": 0.004
+    },
+    "pg_treatment": {
+      "short": "Phosphogypsum treatment",
+      "label": "Washing & drying to reduce P2O5 / fluoride",
+      "cost_inr_per_t": 400,
+      "tco2e_per_t": 0.02
+    },
+    "red_mud_neutralisation": {
+      "short": "Red mud neutralisation",
+      "label": "Neutralisation & dewatering",
+      "cost_inr_per_t": 500,
+      "tco2e_per_t": 0.02
+    },
+    "red_mud_drying": {
+      "short": "Red mud drying",
+      "label": "Drying & dosing",
+      "cost_inr_per_t": 150,
+      "tco2e_per_t": 0.02
+    },
+    "deoiling": {
+      "short": "Mill scale de-oiling",
+      "label": "De-oiling of mill scale",
+      "cost_inr_per_t": 200,
+      "tco2e_per_t": 0.005
+    }
+  },
+  "materials": [
+    {
+      "id": "gbf_slag",
+      "name": "Granulated blast furnace slag",
+      "aliases": [
+        "gbf slag",
+        "blast furnace slag",
+        "bf slag",
+        "ggbs",
+        "ggbfs",
+        "granulated slag"
+      ],
+      "source_sectors": [
+        "Steel"
+      ],
+      "properties": [
+        "latent hydraulic",
+        "glassy",
+        "calcium aluminosilicate"
+      ],
+      "max_radius_km": 500,
+      "disposal_cost_inr_per_t": 100,
+      "byproduct_price_inr_per_t": 1200,
+      "uses": [
+        {
+          "consumer_sector": "Cement",
+          "use": "Clinker substitute in Portland Slag Cement",
+          "virgin_input": "Clinker",
+          "compatibility": 0.95,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 3500,
+          "avoided_tco2e_per_t": 0.72,
+          "typical_demand_tpm": 60000,
+          "processing": "ggbs_grinding",
+          "in_house_sectors": [
+            "Cement"
+          ],
+          "novel": false,
+          "standards": [
+            "IS 455 (Portland Slag Cement)",
+            "IS 16714 (GGBS)"
+          ]
+        },
+        {
+          "consumer_sector": "Ready-mix concrete",
+          "use": "GGBS as supplementary cementitious material",
+          "virgin_input": "OPC",
+          "compatibility": 0.85,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 5500,
+          "avoided_tco2e_per_t": 0.68,
+          "typical_demand_tpm": 10000,
+          "processing": "ggbs_grinding",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 16714 (GGBS)",
+            "IS 456"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "steel_slag",
+      "name": "Steel slag (SMS / BOF slag)",
+      "aliases": [
+        "steel slag",
+        "sms slag",
+        "bof slag",
+        "ld slag",
+        "converter slag",
+        "eaf slag",
+        "slag"
+      ],
+      "source_sectors": [
+        "Steel"
+      ],
+      "properties": [
+        "hard",
+        "abrasion resistant",
+        "volumetric expansion risk (needs weathering)"
+      ],
+      "max_radius_km": 150,
+      "disposal_cost_inr_per_t": 250,
+      "byproduct_price_inr_per_t": 300,
+      "uses": [
+        {
+          "consumer_sector": "Road construction",
+          "use": "Processed aggregate for bituminous & sub-base layers",
+          "virgin_input": "Natural crushed stone",
+          "compatibility": 0.85,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 900,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 15000,
+          "processing": "slag_processing",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IRC guidelines on steel slag in roads",
+            "IS 383"
+          ]
+        },
+        {
+          "consumer_sector": "Cement",
+          "use": "Raw-mix component (pre-decarbonated CaO)",
+          "virgin_input": "Limestone",
+          "compatibility": 0.6,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 700,
+          "avoided_tco2e_per_t": 0.3,
+          "typical_demand_tpm": 5000,
+          "processing": "slag_crushing",
+          "in_house_sectors": [
+            "Cement"
+          ],
+          "novel": true,
+          "standards": [
+            "Plant raw-mix QA (chemistry check)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fly_ash",
+      "name": "Fly ash",
+      "aliases": [
+        "fly ash",
+        "flyash",
+        "pfa",
+        "pulverised fuel ash",
+        "pulverized fuel ash"
+      ],
+      "source_sectors": [
+        "Thermal power"
+      ],
+      "properties": [
+        "pozzolanic",
+        "fine",
+        "siliceous"
+      ],
+      "max_radius_km": 300,
+      "disposal_cost_inr_per_t": 200,
+      "byproduct_price_inr_per_t": 100,
+      "uses": [
+        {
+          "consumer_sector": "Cement",
+          "use": "Pozzolana in Portland Pozzolana Cement",
+          "virgin_input": "Clinker",
+          "compatibility": 0.95,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 3500,
+          "avoided_tco2e_per_t": 0.7,
+          "typical_demand_tpm": 50000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 1489-1 (PPC)",
+            "IS 3812-1"
+          ]
+        },
+        {
+          "consumer_sector": "Bricks & blocks",
+          "use": "Fly ash bricks replacing fired clay bricks",
+          "virgin_input": "Brick earth (fired clay)",
+          "compatibility": 0.9,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 600,
+          "avoided_tco2e_per_t": 0.15,
+          "typical_demand_tpm": 20000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 12894"
+          ]
+        },
+        {
+          "consumer_sector": "Ready-mix concrete",
+          "use": "Classified fly ash as partial cement replacement",
+          "virgin_input": "OPC",
+          "compatibility": 0.85,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 5500,
+          "avoided_tco2e_per_t": 0.65,
+          "typical_demand_tpm": 10000,
+          "processing": "ash_classification",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 3812-1",
+            "IS 456"
+          ]
+        },
+        {
+          "consumer_sector": "Road construction",
+          "use": "Embankment & fill material",
+          "virgin_input": "Borrow soil",
+          "compatibility": 0.75,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 350,
+          "avoided_tco2e_per_t": 0.005,
+          "typical_demand_tpm": 40000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IRC SP:58"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pond_ash",
+      "name": "Pond / bottom ash",
+      "aliases": [
+        "pond ash",
+        "bottom ash",
+        "ash pond"
+      ],
+      "source_sectors": [
+        "Thermal power"
+      ],
+      "properties": [
+        "coarse",
+        "variable moisture"
+      ],
+      "max_radius_km": 150,
+      "disposal_cost_inr_per_t": 150,
+      "byproduct_price_inr_per_t": 50,
+      "uses": [
+        {
+          "consumer_sector": "Road construction",
+          "use": "Embankment & structural fill",
+          "virgin_input": "Borrow soil",
+          "compatibility": 0.8,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 350,
+          "avoided_tco2e_per_t": 0.005,
+          "typical_demand_tpm": 30000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IRC SP:58"
+          ]
+        },
+        {
+          "consumer_sector": "Bricks & blocks",
+          "use": "Fine aggregate in blocks",
+          "virgin_input": "River sand",
+          "compatibility": 0.6,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 1800,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 5000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": true,
+          "standards": [
+            "IS 12894"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundry_sand",
+      "name": "Spent foundry sand",
+      "aliases": [
+        "foundry sand",
+        "spent sand",
+        "used foundry sand",
+        "waste foundry sand",
+        "moulding sand",
+        "molding sand"
+      ],
+      "source_sectors": [
+        "Foundry"
+      ],
+      "properties": [
+        "silica-rich",
+        "uniform grading",
+        "may contain binders"
+      ],
+      "max_radius_km": 100,
+      "disposal_cost_inr_per_t": 800,
+      "byproduct_price_inr_per_t": 200,
+      "uses": [
+        {
+          "consumer_sector": "Foundry",
+          "use": "Reclaimed moulding sand back into foundries",
+          "virgin_input": "New silica sand",
+          "compatibility": 0.85,
+          "substitution_ratio": 0.9,
+          "virgin_price_inr_per_t": 2500,
+          "avoided_tco2e_per_t": 0.02,
+          "typical_demand_tpm": 6000,
+          "processing": "sand_reclamation",
+          "in_house_sectors": [],
+          "novel": true,
+          "standards": [
+            "AFS grain fineness & LOI limits"
+          ]
+        },
+        {
+          "consumer_sector": "Ready-mix concrete",
+          "use": "Partial fine-aggregate replacement",
+          "virgin_input": "River sand",
+          "compatibility": 0.7,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 1800,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 3000,
+          "processing": "sand_reclamation",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 383"
+          ]
+        },
+        {
+          "consumer_sector": "Bricks & blocks",
+          "use": "Sand replacement in blocks & pavers",
+          "virgin_input": "River sand",
+          "compatibility": 0.75,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 1800,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 3000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "Leachate test before use"
+          ]
+        },
+        {
+          "consumer_sector": "Road construction",
+          "use": "Sub-base & fill",
+          "virgin_input": "Borrow soil",
+          "compatibility": 0.65,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 350,
+          "avoided_tco2e_per_t": 0.005,
+          "typical_demand_tpm": 3000,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "Leachate test before use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "red_mud",
+      "name": "Red mud (bauxite residue)",
+      "aliases": [
+        "red mud",
+        "bauxite residue",
+        "alumina residue"
+      ],
+      "source_sectors": [
+        "Aluminium"
+      ],
+      "properties": [
+        "highly alkaline",
+        "iron-rich",
+        "fine"
+      ],
+      "max_radius_km": 250,
+      "disposal_cost_inr_per_t": 350,
+      "byproduct_price_inr_per_t": 0,
+      "uses": [
+        {
+          "consumer_sector": "Cement",
+          "use": "Iron corrective in clinker raw mix",
+          "virgin_input": "Laterite / iron ore",
+          "compatibility": 0.7,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 1200,
+          "avoided_tco2e_per_t": 0.02,
+          "typical_demand_tpm": 3000,
+          "processing": "red_mud_drying",
+          "in_house_sectors": [
+            "Cement"
+          ],
+          "novel": true,
+          "standards": [
+            "Hazardous Waste Rules authorisation",
+            "Plant raw-mix QA"
+          ]
+        },
+        {
+          "consumer_sector": "Bricks & blocks",
+          "use": "Neutralised red-mud blended bricks",
+          "virgin_input": "Brick earth (fired clay)",
+          "compatibility": 0.55,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 600,
+          "avoided_tco2e_per_t": 0.05,
+          "typical_demand_tpm": 2000,
+          "processing": "red_mud_neutralisation",
+          "in_house_sectors": [],
+          "novel": true,
+          "standards": [
+            "Hazardous Waste Rules authorisation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phosphogypsum",
+      "name": "Phosphogypsum",
+      "aliases": [
+        "phosphogypsum",
+        "phospho gypsum",
+        "pg gypsum",
+        "by-product gypsum",
+        "chemical gypsum"
+      ],
+      "source_sectors": [
+        "Fertiliser"
+      ],
+      "properties": [
+        "calcium sulphate dihydrate",
+        "trace P2O5 / fluoride"
+      ],
+      "max_radius_km": 400,
+      "disposal_cost_inr_per_t": 250,
+      "byproduct_price_inr_per_t": 500,
+      "uses": [
+        {
+          "consumer_sector": "Cement",
+          "use": "Set retarder replacing mineral gypsum",
+          "virgin_input": "Mineral gypsum",
+          "compatibility": 0.9,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 3000,
+          "avoided_tco2e_per_t": 0.02,
+          "typical_demand_tpm": 4000,
+          "processing": "pg_treatment",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 12679"
+          ]
+        },
+        {
+          "consumer_sector": "Gypsum products",
+          "use": "Plaster & gypsum board",
+          "virgin_input": "Mineral gypsum",
+          "compatibility": 0.75,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 3000,
+          "avoided_tco2e_per_t": 0.02,
+          "typical_demand_tpm": 5000,
+          "processing": "pg_treatment",
+          "in_house_sectors": [
+            "Gypsum products"
+          ],
+          "novel": false,
+          "standards": [
+            "IS 12679"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mill_scale",
+      "name": "Mill scale",
+      "aliases": [
+        "mill scale",
+        "millscale",
+        "iron oxide scale",
+        "rolling scale"
+      ],
+      "source_sectors": [
+        "Steel"
+      ],
+      "properties": [
+        "~70% Fe",
+        "oily fraction possible"
+      ],
+      "max_radius_km": 500,
+      "disposal_cost_inr_per_t": 100,
+      "byproduct_price_inr_per_t": 2500,
+      "uses": [
+        {
+          "consumer_sector": "Steel",
+          "use": "Iron-ore substitute in sinter plants",
+          "virgin_input": "Iron ore fines",
+          "compatibility": 0.9,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 4500,
+          "avoided_tco2e_per_t": 0.04,
+          "typical_demand_tpm": 8000,
+          "processing": "deoiling",
+          "in_house_sectors": [
+            "Steel"
+          ],
+          "novel": false,
+          "standards": [
+            "Oil content below sinter-plant limit"
+          ]
+        },
+        {
+          "consumer_sector": "Cement",
+          "use": "Iron corrective in raw mix",
+          "virgin_input": "Laterite / iron ore",
+          "compatibility": 0.7,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 1200,
+          "avoided_tco2e_per_t": 0.02,
+          "typical_demand_tpm": 1500,
+          "processing": null,
+          "in_house_sectors": [],
+          "novel": true,
+          "standards": [
+            "Plant raw-mix QA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cd_waste",
+      "name": "Construction & demolition waste",
+      "aliases": [
+        "c&d waste",
+        "construction waste",
+        "demolition waste",
+        "construction debris",
+        "concrete debris",
+        "rubble"
+      ],
+      "source_sectors": [
+        "Construction"
+      ],
+      "properties": [
+        "mixed",
+        "needs crushing & sorting"
+      ],
+      "max_radius_km": 50,
+      "disposal_cost_inr_per_t": 400,
+      "byproduct_price_inr_per_t": 100,
+      "uses": [
+        {
+          "consumer_sector": "Road construction",
+          "use": "Recycled aggregate for sub-base",
+          "virgin_input": "Natural crushed stone",
+          "compatibility": 0.8,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 900,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 20000,
+          "processing": "cd_recycling",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 383 (permits recycled aggregates)"
+          ]
+        },
+        {
+          "consumer_sector": "Ready-mix concrete",
+          "use": "Recycled concrete aggregate (non-structural)",
+          "virgin_input": "Natural crushed stone",
+          "compatibility": 0.6,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 900,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 8000,
+          "processing": "cd_recycling",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 383"
+          ]
+        },
+        {
+          "consumer_sector": "Bricks & blocks",
+          "use": "Aggregate in pavers & blocks",
+          "virgin_input": "Natural aggregate",
+          "compatibility": 0.7,
+          "substitution_ratio": 1.0,
+          "virgin_price_inr_per_t": 900,
+          "avoided_tco2e_per_t": 0.01,
+          "typical_demand_tpm": 5000,
+          "processing": "cd_recycling",
+          "in_house_sectors": [],
+          "novel": false,
+          "standards": [
+            "IS 383"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "note": "Real Indian policy instruments, summarised for screening only. Terms change; always verify the current notification on the official portal before relying on eligibility. No subsidy amounts are asserted."
+  },
+  "schemes": [
+    {
+      "id": "flyash-2021",
+      "name": "Fly Ash Utilisation Notification",
+      "authority": "Ministry of Environment, Forest & Climate Change",
+      "year": 2021,
+      "type": "Regulatory mandate",
+      "applies_if": {"materials": ["fly_ash", "pond_ash"]},
+      "relevance": "Thermal plants must ensure full utilisation of ash, including legacy ash, and bear transport costs for eligible uses within a notified radius. That makes ash offtake cheap or free for cement, brick and road users.",
+      "verify": ["Current utilisation targets and penalty clauses", "Transport-cost radius in the latest amendment", "Whether the use is on the notified eligible-use list"],
+      "portal": "https://moef.gov.in"
+    },
+    {
+      "id": "hwm-2016",
+      "name": "Hazardous and Other Wastes (Management & Transboundary Movement) Rules",
+      "authority": "Ministry of Environment, Forest & Climate Change / CPCB",
+      "year": 2016,
+      "type": "Regulatory approval",
+      "applies_if": {"materials": ["red_mud", "phosphogypsum"]},
+      "relevance": "Using listed wastes as a resource requires authorisation from the state pollution control board. CPCB publishes standard operating procedures for specific utilisation routes.",
+      "verify": ["Is a CPCB SOP published for this material–use pair?", "SPCB authorisation for the consumer", "Leachate / radioactivity limits where applicable"],
+      "portal": "https://cpcb.nic.in"
+    },
+    {
+      "id": "cd-rules",
+      "name": "Construction & Demolition Waste Management Rules",
+      "authority": "Ministry of Environment, Forest & Climate Change",
+      "year": 2016,
+      "type": "Regulatory mandate",
+      "applies_if": {"materials": ["cd_waste"]},
+      "relevance": "Creates obligations to process C&D waste and to procure recycled C&D products in public works. That gives recycled aggregate a policy-backed buyer.",
+      "verify": ["Whether the newer C&D rules notification applies in your state", "Local-body procurement percentage for recycled products"],
+      "portal": "https://moef.gov.in"
+    },
+    {
+      "id": "scrap-2019",
+      "name": "Steel Scrap Recycling Policy",
+      "authority": "Ministry of Steel",
+      "year": 2019,
+      "type": "Policy framework",
+      "applies_if": {"producer_sectors": ["Steel"], "materials": ["mill_scale", "steel_slag"]},
+      "relevance": "Sets a framework for scientific processing and recycling of ferrous residues. Useful for positioning mill-scale and slag recovery as policy-aligned practice.",
+      "verify": ["Registration requirements for processing centres", "Applicability to your residue stream"],
+      "portal": "https://steel.gov.in/steel-scrap-recycling-policy"
+    },
+    {
+      "id": "green-steel-2024",
+      "name": "Green Steel Taxonomy",
+      "authority": "Ministry of Steel",
+      "year": 2024,
+      "type": "Classification / labelling",
+      "applies_if": {"producer_sectors": ["Steel"]},
+      "relevance": "Classifies steel by emissions intensity. Documented by-product utilisation supports a producer's sustainability disclosures and green-steel positioning.",
+      "verify": ["How by-product credits are treated in the emissions-intensity boundary", "MRV requirements"],
+      "portal": "https://steel.gov.in/green-steel-taxonomy-india"
+    },
+    {
+      "id": "ccts-2023",
+      "name": "Carbon Credit Trading Scheme (compliance mechanism)",
+      "authority": "Ministry of Power / Bureau of Energy Efficiency",
+      "year": 2023,
+      "type": "Carbon market",
+      "applies_if": {"consumer_sectors": ["Cement", "Steel"], "min_net_tco2e_per_year": 1000},
+      "relevance": "Obligated sectors such as cement and steel receive GHG-intensity targets. Lower clinker factor or lower ore use from by-products can help meet the target or generate tradeable certificates.",
+      "verify": ["Whether the consumer plant is a notified obligated entity", "Its target trajectory and baseline year"],
+      "portal": "https://beeindia.gov.in"
+    }
+  ]
+}

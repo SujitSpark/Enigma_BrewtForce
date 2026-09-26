@@ -1,0 +1,1040 @@
+{
+ "type": "FeatureCollection",
+ "_meta": {
+  "note": "Location layer only (where things are). What each site supplies/needs lives in profiles.json. 'facility' = real named plant at approximate town-level coordinates; 'cluster' = illustrative regional demand hub; 'processor' = illustrative processing hub."
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.66,
+     15.18
+    ]
+   },
+   "properties": {
+    "id": "p-jsw-vjnr",
+    "name": "JSW Steel – Vijayanagar Works",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Toranagallu, Karnataka",
+    "state": "Karnataka",
+    "district": "Ballari",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.03,
+     18.7
+    ]
+   },
+   "properties": {
+    "id": "p-jsw-dolvi",
+    "name": "JSW Steel – Dolvi Works",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Dolvi, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Raigad",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.19,
+     22.79
+    ]
+   },
+   "properties": {
+    "id": "p-tata-jsr",
+    "name": "Tata Steel – Jamshedpur Works",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Jamshedpur, Jharkhand",
+    "state": "Jharkhand",
+    "district": "East Singhbhum",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     85.98,
+     20.95
+    ]
+   },
+   "properties": {
+    "id": "p-tata-kpo",
+    "name": "Tata Steel – Kalinganagar",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Kalinganagar, Odisha",
+    "state": "Odisha",
+    "district": "Jajpur",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     81.38,
+     21.19
+    ]
+   },
+   "properties": {
+    "id": "p-sail-bsp",
+    "name": "SAIL – Bhilai Steel Plant",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Bhilai, Chhattisgarh",
+    "state": "Chhattisgarh",
+    "district": "Durg",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     84.86,
+     22.21
+    ]
+   },
+   "properties": {
+    "id": "p-sail-rsp",
+    "name": "SAIL – Rourkela Steel Plant",
+    "sector": "Steel",
+    "kind": "facility",
+    "city": "Rourkela, Odisha",
+    "state": "Odisha",
+    "district": "Sundargarh",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.61,
+     28.6
+    ]
+   },
+   "properties": {
+    "id": "p-ntpc-dadri",
+    "name": "NTPC – Dadri",
+    "sector": "Thermal power",
+    "kind": "facility",
+    "city": "Dadri, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "district": "Gautam Buddh Nagar",
+    "industry_type": "Power generation"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     82.67,
+     24.1
+    ]
+   },
+   "properties": {
+    "id": "p-ntpc-vsp",
+    "name": "NTPC – Vindhyachal",
+    "sector": "Thermal power",
+    "kind": "facility",
+    "city": "Singrauli, Madhya Pradesh",
+    "state": "Madhya Pradesh",
+    "district": "Singrauli",
+    "industry_type": "Power generation"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.29,
+     19.97
+    ]
+   },
+   "properties": {
+    "id": "p-mahagenco-ctps",
+    "name": "Mahagenco – Chandrapur TPS",
+    "sector": "Thermal power",
+    "kind": "facility",
+    "city": "Chandrapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Chandrapur",
+    "industry_type": "Power generation"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     83.4,
+     19.71
+    ]
+   },
+   "properties": {
+    "id": "p-vedanta-lanj",
+    "name": "Vedanta – Lanjigarh Alumina Refinery",
+    "sector": "Aluminium",
+    "kind": "facility",
+    "city": "Lanjigarh, Odisha",
+    "state": "Odisha",
+    "district": "Kalahandi",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.67,
+     20.26
+    ]
+   },
+   "properties": {
+    "id": "p-ppl-paradeep",
+    "name": "Paradeep Phosphates",
+    "sector": "Fertiliser",
+    "kind": "facility",
+    "city": "Paradeep, Odisha",
+    "state": "Odisha",
+    "district": "Jagatsinghpur",
+    "industry_type": "Chemicals"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.21,
+     19.88
+    ]
+   },
+   "properties": {
+    "id": "c-ut-awarpur",
+    "name": "UltraTech Cement – Awarpur",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Chandrapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Chandrapur",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.13,
+     19.78
+    ]
+   },
+   "properties": {
+    "id": "c-ambuja-chandrapur",
+    "name": "Ambuja Cements – Chandrapur",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Upparwahi, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Chandrapur",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     81.42,
+     21.25
+    ]
+   },
+   "properties": {
+    "id": "c-acc-jamul",
+    "name": "ACC – Jamul Cement Works",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Jamul, Chhattisgarh",
+    "state": "Chhattisgarh",
+    "district": "Durg",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     82.03,
+     21.53
+    ]
+   },
+   "properties": {
+    "id": "c-ut-hirmi",
+    "name": "UltraTech Cement – Hirmi",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Hirmi, Chhattisgarh",
+    "state": "Chhattisgarh",
+    "district": "Baloda Bazar",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.68,
+     15.17
+    ]
+   },
+   "properties": {
+    "id": "c-jsw-cement-vjnr",
+    "name": "JSW Cement – Vijayanagar",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Toranagallu, Karnataka",
+    "state": "Karnataka",
+    "district": "Ballari",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.99,
+     17.06
+    ]
+   },
+   "properties": {
+    "id": "c-acc-wadi",
+    "name": "ACC – Wadi Cement Works",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Wadi, Karnataka",
+    "state": "Karnataka",
+    "district": "Kalaburagi",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     84.58,
+     22.19
+    ]
+   },
+   "properties": {
+    "id": "c-dalmia-rajgangpur",
+    "name": "Dalmia Cement – Rajgangpur",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Rajgangpur, Odisha",
+    "state": "Odisha",
+    "district": "Sundargarh",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.25,
+     22.76
+    ]
+   },
+   "properties": {
+    "id": "c-nuvoco-jojobera",
+    "name": "Nuvoco – Jojobera Cement Plant",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Jamshedpur, Jharkhand",
+    "state": "Jharkhand",
+    "district": "East Singhbhum",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.56,
+     28.56
+    ]
+   },
+   "properties": {
+    "id": "c-ut-dadri",
+    "name": "UltraTech Cement – Dadri Grinding Unit",
+    "sector": "Cement",
+    "kind": "facility",
+    "city": "Dadri, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "district": "Gautam Buddh Nagar",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.86,
+     18.52
+    ]
+   },
+   "properties": {
+    "id": "k-rmc-pune",
+    "name": "Pune ready-mix concrete hub",
+    "sector": "Ready-mix concrete",
+    "kind": "cluster",
+    "city": "Pune, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     72.88,
+     19.08
+    ]
+   },
+   "properties": {
+    "id": "k-rmc-mumbai",
+    "name": "Mumbai MMR ready-mix concrete hub",
+    "sector": "Ready-mix concrete",
+    "kind": "cluster",
+    "city": "Mumbai, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Mumbai Suburban",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.59,
+     12.97
+    ]
+   },
+   "properties": {
+    "id": "k-rmc-blr",
+    "name": "Bengaluru ready-mix concrete hub",
+    "sector": "Ready-mix concrete",
+    "kind": "cluster",
+    "city": "Bengaluru, Karnataka",
+    "state": "Karnataka",
+    "district": "Bengaluru Urban",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.21,
+     28.61
+    ]
+   },
+   "properties": {
+    "id": "k-rmc-ncr",
+    "name": "Delhi NCR ready-mix concrete hub",
+    "sector": "Ready-mix concrete",
+    "kind": "cluster",
+    "city": "Delhi NCR",
+    "state": "Delhi",
+    "district": "New Delhi",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.95,
+     18.45
+    ]
+   },
+   "properties": {
+    "id": "k-road-pune",
+    "name": "Pune regional road works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Pune, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.09,
+     21.15
+    ]
+   },
+   "properties": {
+    "id": "k-road-nagpur",
+    "name": "Vidarbha road & expressway works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Nagpur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     85.88,
+     20.46
+    ]
+   },
+   "properties": {
+    "id": "k-road-odisha",
+    "name": "Odisha industrial-corridor road works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Cuttack, Odisha",
+    "state": "Odisha",
+    "district": "Cuttack",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     85.31,
+     23.34
+    ]
+   },
+   "properties": {
+    "id": "k-road-jharkhand",
+    "name": "Jharkhand highway works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Ranchi, Jharkhand",
+    "state": "Jharkhand",
+    "district": "Ranchi",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.5,
+     28.47
+    ]
+   },
+   "properties": {
+    "id": "k-road-ncr",
+    "name": "NCR expressway works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Greater Noida, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "district": "Gautam Buddh Nagar",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.92,
+     15.14
+    ]
+   },
+   "properties": {
+    "id": "k-road-ballari",
+    "name": "Ballari–Hospet road works",
+    "sector": "Road construction",
+    "kind": "cluster",
+    "city": "Ballari, Karnataka",
+    "state": "Karnataka",
+    "district": "Ballari",
+    "industry_type": "Infrastructure"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.3,
+     19.95
+    ]
+   },
+   "properties": {
+    "id": "k-brick-chandrapur",
+    "name": "Chandrapur fly-ash brick cluster",
+    "sector": "Bricks & blocks",
+    "kind": "cluster",
+    "city": "Chandrapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Chandrapur",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.45,
+     28.67
+    ]
+   },
+   "properties": {
+    "id": "k-brick-ncr",
+    "name": "NCR fly-ash brick & block cluster",
+    "sector": "Bricks & blocks",
+    "kind": "cluster",
+    "city": "Ghaziabad, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "district": "Ghaziabad",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     74.24,
+     16.7
+    ]
+   },
+   "properties": {
+    "id": "k-brick-kolhapur",
+    "name": "Kolhapur foundry-belt block makers",
+    "sector": "Bricks & blocks",
+    "kind": "cluster",
+    "city": "Kolhapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     85.82,
+     20.3
+    ]
+   },
+   "properties": {
+    "id": "k-gypsum-odisha",
+    "name": "Eastern India gypsum products makers",
+    "sector": "Gypsum products",
+    "kind": "cluster",
+    "city": "Bhubaneswar, Odisha",
+    "state": "Odisha",
+    "district": "Khordha",
+    "industry_type": "Construction materials"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     74.3,
+     16.72
+    ]
+   },
+   "properties": {
+    "id": "k-foundry-kolhapur",
+    "name": "Kolhapur foundry cluster",
+    "sector": "Foundry",
+    "kind": "cluster",
+    "city": "Kolhapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.86,
+     18.76
+    ]
+   },
+   "properties": {
+    "id": "k-foundry-pune",
+    "name": "Pune (Chakan) foundry cluster",
+    "sector": "Foundry",
+    "kind": "cluster",
+    "city": "Chakan, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "industry_type": "Manufacturing"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.8,
+     15.16
+    ]
+   },
+   "properties": {
+    "id": "h-slag-ballari",
+    "name": "Slag processing yard – Ballari",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Ballari, Karnataka",
+    "state": "Karnataka",
+    "district": "Ballari",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "slag_processing",
+      "capacity_tpm": 40000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.1,
+     22.78
+    ]
+   },
+   "properties": {
+    "id": "h-slag-jsr",
+    "name": "Slag processing yard – Jamshedpur",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Jamshedpur, Jharkhand",
+    "state": "Jharkhand",
+    "district": "East Singhbhum",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "slag_processing",
+      "capacity_tpm": 40000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     81.33,
+     21.21
+    ]
+   },
+   "properties": {
+    "id": "h-slag-bhilai",
+    "name": "Slag processing yard – Bhilai",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Bhilai, Chhattisgarh",
+    "state": "Chhattisgarh",
+    "district": "Durg",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "slag_processing",
+      "capacity_tpm": 25000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.83,
+     18.74
+    ]
+   },
+   "properties": {
+    "id": "h-slag-pune",
+    "name": "Slag processing yard – Chakan",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Chakan, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "slag_processing",
+      "capacity_tpm": 15000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.12,
+     18.99
+    ]
+   },
+   "properties": {
+    "id": "h-ggbs-raigad",
+    "name": "GGBS grinding unit – Panvel",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Panvel, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Raigad",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "ggbs_grinding",
+      "capacity_tpm": 40000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.5,
+     13.1
+    ]
+   },
+   "properties": {
+    "id": "h-ggbs-blr",
+    "name": "GGBS grinding unit – Bengaluru",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Bengaluru, Karnataka",
+    "state": "Karnataka",
+    "district": "Bengaluru Rural",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "ggbs_grinding",
+      "capacity_tpm": 20000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.05,
+     21.1
+    ]
+   },
+   "properties": {
+    "id": "h-ash-nagpur",
+    "name": "Fly ash classification unit – Nagpur",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Nagpur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Nagpur",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "ash_classification",
+      "capacity_tpm": 30000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.6,
+     28.55
+    ]
+   },
+   "properties": {
+    "id": "h-ash-ncr",
+    "name": "Fly ash classification unit – Dadri",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Dadri, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "district": "Gautam Buddh Nagar",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "ash_classification",
+      "capacity_tpm": 30000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     74.27,
+     16.73
+    ]
+   },
+   "properties": {
+    "id": "h-sand-kolhapur",
+    "name": "Foundry sand reclamation – Kolhapur",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Kolhapur, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Kolhapur",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "sand_reclamation",
+      "capacity_tpm": 6000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     77.18,
+     28.72
+    ]
+   },
+   "properties": {
+    "id": "h-cd-ncr",
+    "name": "C&D recycling plant – NCR",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Delhi NCR",
+    "state": "Delhi",
+    "district": "North Delhi",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "cd_recycling",
+      "capacity_tpm": 40000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     73.9,
+     18.6
+    ]
+   },
+   "properties": {
+    "id": "h-cd-pune",
+    "name": "C&D recycling plant – Pune",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Pune, Maharashtra",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "cd_recycling",
+      "capacity_tpm": 12000
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.6,
+     20.3
+    ]
+   },
+   "properties": {
+    "id": "h-pg-paradeep",
+    "name": "Phosphogypsum treatment unit – Paradeep",
+    "sector": "Processing",
+    "kind": "processor",
+    "city": "Paradeep, Odisha",
+    "state": "Odisha",
+    "district": "Jagatsinghpur",
+    "industry_type": "Resource processing",
+    "capabilities": [
+     {
+      "step": "pg_treatment",
+      "capacity_tpm": 15000
+     }
+    ]
+   }
+  }
+ ]
+}
