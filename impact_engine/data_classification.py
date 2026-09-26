@@ -1,0 +1,28 @@
+"""
+Data Classification and Traceability Constants for Impact Engine.
+
+Defines explicit boundaries between Verified Primary/Secondary Data, Synthetic/Demo Data,
+User-Provided Inputs, and Calculated Outputs.
+"""
+
+from enum import Enum
+
+
+class DataClassification(str, Enum):
+    """Data classification categories for strict system boundary enforcement."""
+    VERIFIED_DATA = "VERIFIED_DATA"
+    SYNTHETIC_DEMO_DATA = "SYNTHETIC_DEMO_DATA"
+    USER_PROVIDED_DATA = "USER_PROVIDED_DATA"
+    CALCULATED_OUTPUT = "CALCULATED_OUTPUT"
+
+
+SYNTHETIC_DATA_DISCLAIMER = (
+    "SYNTHETIC / DEMO DATA - FOR DEVELOPMENT, TESTING, AND DEMONSTRATION PURPOSES ONLY. "
+    "NEVER PRESENTED AS AN OFFICIAL INDIAN GOVERNMENT VALUE. "
+    "MUST NOT BE USED TO CLAIM REAL-WORLD ENVIRONMENTAL IMPACT OR OFFICIAL REGULATORY COMPLIANCE."
+)
+
+SCHEME_MATCHING_DISCLAIMER = (
+    "SYNTHETIC / DEMO SCHEME MATCHING ARCHITECTURE - FOR PRELIMINARY DEMONSTRATION ONLY. "
+    "DOES NOT CONSTITUTE OFFICIAL GOVERNMENT ELIGIBILITY, APPLICATION SUCCESS, OR LEGAL ADVICE."
+)

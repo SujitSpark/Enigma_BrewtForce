@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_name": "Synthetic Government Scheme Matching Demo Dataset",
+  "dataset_type": "SYNTHETIC_DEMO_DATA",
+  "description": "Synthetic demonstration dataset of industrial schemes for developing matching architecture.",
+  "disclaimer": "SYNTHETIC / DEMO DATA - FOR ARCHITECTURAL DEMONSTRATION ONLY. DOES NOT CONSTITUTE OFFICIAL GOVERNMENT ELIGIBILITY OR LEGAL ADVICE.",
+  "schemes": [
+    {
+      "scheme_id": "SYNTH_SCHEME_PAT_01",
+      "scheme_name": "SYNTHETIC / DEMO - Perform, Achieve and Trade (PAT) Energy Efficiency Scheme",
+      "description": "Demonstration model for designated energy-intensive consumer industrial symbiosis projects.",
+      "target_materials": ["Steel", "Blast Furnace Slag", "Fly Ash", "Electricity / Grid Power"],
+      "required_processes": ["Granulation", "Brick Manufacturing", "Heat Recovery"],
+      "min_quantity_tonnes": 50.0,
+      "max_distance_km": 500.0,
+      "target_geography": "India",
+      "source": "Synthetic Bureau of Energy Efficiency Demo Model",
+      "source_url": "https://example.org/synthetic/pat-scheme-demo",
+      "last_verified_date": "2024-01-15",
+      "is_synthetic": true
+    },
+    {
+      "scheme_id": "SYNTH_SCHEME_SLAG_ROAD_02",
+      "scheme_name": "SYNTHETIC / DEMO - Steel Slag Road Construction Promotion Initiative",
+      "description": "Demonstration scheme matching steel plant slag utilization in highway infrastructure.",
+      "target_materials": ["Steel", "Blast Furnace Slag", "Copper Slag"],
+      "required_processes": ["Aggregate Processing", "Road Sub-base Construction"],
+      "min_quantity_tonnes": 100.0,
+      "max_distance_km": 300.0,
+      "target_geography": "India",
+      "source": "Synthetic Ministry of Steel / MoRTH Demo Model",
+      "source_url": "https://example.org/synthetic/slag-road-demo",
+      "last_verified_date": "2024-02-01",
+      "is_synthetic": true
+    },
+    {
+      "scheme_id": "SYNTH_SCHEME_FLY_ASH_03",
+      "scheme_name": "SYNTHETIC / DEMO - Thermal Ash Mandatory Utilization Directives",
+      "description": "Demonstration scheme for 100% fly ash utilization within 300km radius.",
+      "target_materials": ["Fly Ash", "Phosphogypsum"],
+      "required_processes": ["Brick Manufacturing", "Cement Additive", "Mine Backfilling"],
+      "min_quantity_tonnes": 10.0,
+      "max_distance_km": 300.0,
+      "target_geography": "India",
+      "source": "Synthetic MoEFCC Ash Utilization Demo Notification",
+      "source_url": "https://example.org/synthetic/fly-ash-directive-demo",
+      "last_verified_date": "2024-03-10",
+      "is_synthetic": true
+    }
+  ]
+}
