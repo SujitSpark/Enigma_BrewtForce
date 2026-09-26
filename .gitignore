@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Runtime artefacts
+*.db
+*.log
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Demo recordings (large binaries)
+demo/*.mp4

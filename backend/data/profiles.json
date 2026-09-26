@@ -1,0 +1,1194 @@
+{
+ "_meta": {
+  "note": "Resource profiles (what each site supplies/needs, how much, when). Quantities are illustrative order-of-magnitude estimates, not company disclosures. Demand quantity/months null = use the typical value for that sector (materials.json).",
+  "basis": "illustrative"
+ },
+ "supply": [
+  {
+   "industry_id": "p-jsw-vjnr",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 200000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-jsw-vjnr",
+   "material_id": "steel_slag",
+   "quantity_tpm": 80000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-jsw-vjnr",
+   "material_id": "mill_scale",
+   "quantity_tpm": 15000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-jsw-dolvi",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 100000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-jsw-dolvi",
+   "material_id": "steel_slag",
+   "quantity_tpm": 40000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-jsw-dolvi",
+   "material_id": "mill_scale",
+   "quantity_tpm": 8000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-jsr",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 150000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-jsr",
+   "material_id": "steel_slag",
+   "quantity_tpm": 60000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-jsr",
+   "material_id": "mill_scale",
+   "quantity_tpm": 10000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-kpo",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 70000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-kpo",
+   "material_id": "steel_slag",
+   "quantity_tpm": 30000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-tata-kpo",
+   "material_id": "mill_scale",
+   "quantity_tpm": 5000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-bsp",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 150000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-bsp",
+   "material_id": "steel_slag",
+   "quantity_tpm": 50000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-bsp",
+   "material_id": "mill_scale",
+   "quantity_tpm": 8000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-rsp",
+   "material_id": "gbf_slag",
+   "quantity_tpm": 90000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-rsp",
+   "material_id": "steel_slag",
+   "quantity_tpm": 35000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-sail-rsp",
+   "material_id": "mill_scale",
+   "quantity_tpm": 5000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-ntpc-dadri",
+   "material_id": "fly_ash",
+   "quantity_tpm": 100000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-ntpc-dadri",
+   "material_id": "pond_ash",
+   "quantity_tpm": 20000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-ntpc-vsp",
+   "material_id": "fly_ash",
+   "quantity_tpm": 700000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-ntpc-vsp",
+   "material_id": "pond_ash",
+   "quantity_tpm": 100000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-mahagenco-ctps",
+   "material_id": "fly_ash",
+   "quantity_tpm": 300000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-mahagenco-ctps",
+   "material_id": "pond_ash",
+   "quantity_tpm": 60000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-vedanta-lanj",
+   "material_id": "red_mud",
+   "quantity_tpm": 150000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "p-ppl-paradeep",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": 150000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-foundry-kolhapur",
+   "material_id": "foundry_sand",
+   "quantity_tpm": 15000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-foundry-pune",
+   "material_id": "foundry_sand",
+   "quantity_tpm": 10000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-rmc-pune",
+   "material_id": "cd_waste",
+   "quantity_tpm": 30000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-rmc-mumbai",
+   "material_id": "cd_waste",
+   "quantity_tpm": 80000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-rmc-blr",
+   "material_id": "cd_waste",
+   "quantity_tpm": 50000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "industry_id": "k-rmc-ncr",
+   "material_id": "cd_waste",
+   "quantity_tpm": 150000,
+   "months": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "demand": [
+  {
+   "industry_id": "p-tata-jsr",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "p-tata-kpo",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "p-sail-bsp",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "p-sail-rsp",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "red_mud",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-awarpur",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ambuja-chandrapur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ambuja-chandrapur",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ambuja-chandrapur",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ambuja-chandrapur",
+   "material_id": "red_mud",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ambuja-chandrapur",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-jamul",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-jamul",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-jamul",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-jamul",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-jamul",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-hirmi",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-hirmi",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-hirmi",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-hirmi",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-jsw-cement-vjnr",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-jsw-cement-vjnr",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-jsw-cement-vjnr",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-jsw-cement-vjnr",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-wadi",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-wadi",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-wadi",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-acc-wadi",
+   "material_id": "red_mud",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "red_mud",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-dalmia-rajgangpur",
+   "material_id": "mill_scale",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-nuvoco-jojobera",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-nuvoco-jojobera",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-nuvoco-jojobera",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-dadri",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-dadri",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "c-ut-dadri",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-pune",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-pune",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-pune",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-pune",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-mumbai",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-mumbai",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-mumbai",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-mumbai",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-blr",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-blr",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-blr",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-blr",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-ncr",
+   "material_id": "gbf_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-ncr",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-ncr",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-rmc-ncr",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-pune",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-pune",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-pune",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-pune",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-pune",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-nagpur",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-nagpur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-nagpur",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-nagpur",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-odisha",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-odisha",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-odisha",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-jharkhand",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-jharkhand",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-jharkhand",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ncr",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ncr",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ncr",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ballari",
+   "material_id": "steel_slag",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ballari",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-road-ballari",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-chandrapur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-chandrapur",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-chandrapur",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-chandrapur",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-chandrapur",
+   "material_id": "red_mud",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-ncr",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-ncr",
+   "material_id": "pond_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-ncr",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-ncr",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-kolhapur",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-kolhapur",
+   "material_id": "fly_ash",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-brick-kolhapur",
+   "material_id": "cd_waste",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-gypsum-odisha",
+   "material_id": "phosphogypsum",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-foundry-kolhapur",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  },
+  {
+   "industry_id": "k-foundry-pune",
+   "material_id": "foundry_sand",
+   "quantity_tpm": null,
+   "months": null
+  }
+ ]
+}
